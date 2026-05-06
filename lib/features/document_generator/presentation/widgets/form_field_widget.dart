@@ -6,8 +6,9 @@ import '../providers/document_providers.dart';
 
 class FormFieldWidget extends ConsumerStatefulWidget {
   final Field field;
+  final int index;
 
-  const FormFieldWidget({super.key, required this.field});
+  const FormFieldWidget({super.key, required this.field, required this.index});
 
   @override
   ConsumerState<FormFieldWidget> createState() => _FormFieldWidgetState();
@@ -37,7 +38,6 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
   @override
   void didUpdateWidget(FormFieldWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Sync controller when field value is reset externally
     if (widget.field.value != _controller.text) {
       _controller.text = widget.field.value;
     }
@@ -53,18 +53,46 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
     ref.read(formStateProvider.notifier).updateField(widget.field.id, value);
   }
 
+  Icon? _prefixIcon() => switch (widget.field.type) {
+        FieldType.text => const Icon(Icons.person_outline, size: 16, color: Color(0xFF555570)),
+        FieldType.cpf => const Icon(Icons.badge_outlined, size: 16, color: Color(0xFF555570)),
+        FieldType.phone => const Icon(Icons.phone_outlined, size: 16, color: Color(0xFF555570)),
+        FieldType.date => null,
+        FieldType.currency => const Icon(Icons.attach_money, size: 16, color: Color(0xFF555570)),
+        FieldType.multiline => const Icon(Icons.notes_outlined, size: 16, color: Color(0xFF555570)),
+      };
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: switch (widget.field.type) {
-        FieldType.date => _buildDateField(context),
-        FieldType.currency => _buildTextField(prefixText: 'R\$ '),
-        FieldType.cpf => _buildMaskedField('###.###.###-##'),
-        FieldType.phone => _buildMaskedField('(##) #####-####'),
-        FieldType.multiline => _buildMultilineField(),
-        FieldType.text => _buildTextField(),
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                widget.field.label,
+                style: const TextStyle(color: Color(0xFF8888A0), fontSize: 12),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              '/${widget.index.toString().padLeft(2, '0')}',
+              style: const TextStyle(color: Color(0xFF4A4A6A), fontSize: 11),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        switch (widget.field.type) {
+          FieldType.date => _buildDateField(context),
+          FieldType.currency => _buildTextField(prefixText: 'R\$ '),
+          FieldType.cpf => _buildMaskedField(),
+          FieldType.phone => _buildMaskedField(),
+          FieldType.multiline => _buildMultilineField(),
+          FieldType.text => _buildTextField(),
+        },
+      ],
     );
   }
 
@@ -72,7 +100,7 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
     return TextFormField(
       controller: _controller,
       onChanged: _onChanged,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: const TextStyle(color: Colors.white, fontSize: 13),
       decoration: _decoration(prefixText: prefixText),
     );
   }
@@ -81,20 +109,20 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
     return TextFormField(
       controller: _controller,
       onChanged: _onChanged,
-      maxLines: 4,
+      maxLines: 3,
       minLines: 2,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: const TextStyle(color: Colors.white, fontSize: 13),
       decoration: _decoration(),
     );
   }
 
-  Widget _buildMaskedField(String _) {
+  Widget _buildMaskedField() {
     return TextFormField(
       controller: _controller,
       onChanged: _onChanged,
       inputFormatters: [if (_maskFormatter != null) _maskFormatter!],
       keyboardType: TextInputType.number,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: const TextStyle(color: Colors.white, fontSize: 13),
       decoration: _decoration(),
     );
   }
@@ -117,12 +145,12 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
           _onChanged(formatted);
         }
       },
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: const TextStyle(color: Colors.white, fontSize: 13),
       decoration: _decoration(
         suffixIcon: const Icon(
           Icons.calendar_today_rounded,
-          size: 18,
-          color: Color(0xFF888899),
+          size: 16,
+          color: Color(0xFF555570),
         ),
       ),
     );
@@ -130,26 +158,26 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
 
   InputDecoration _decoration({String? prefixText, Widget? suffixIcon}) {
     return InputDecoration(
-      labelText: widget.field.label,
-      labelStyle: const TextStyle(color: Color(0xFF888899), fontSize: 13),
+      prefixIcon: _prefixIcon(),
       prefixText: prefixText,
-      prefixStyle: const TextStyle(color: Colors.white, fontSize: 14),
+      prefixStyle: const TextStyle(color: Colors.white, fontSize: 13),
       suffixIcon: suffixIcon,
       filled: true,
-      fillColor: const Color(0xFF252535),
+      fillColor: const Color(0xFF0F0F1E),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Color(0xFF3A3A4A)),
+        borderSide: const BorderSide(color: Color(0xFF2A2A3F)),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Color(0xFF3A3A4A)),
+        borderSide: const BorderSide(color: Color(0xFF2A2A3F)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Color(0xFF6C63FF), width: 1.5),
+        borderSide: const BorderSide(color: Color(0xFF00BCD4), width: 1.5),
       ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      isDense: true,
     );
   }
 }

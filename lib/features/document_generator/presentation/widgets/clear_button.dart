@@ -7,17 +7,16 @@ class ClearButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return OutlinedButton(
+    return OutlinedButton.icon(
       onPressed: () => ref.read(formStateProvider.notifier).reset(),
+      icon: const Icon(Icons.refresh_rounded, size: 16),
+      label: const Text('Limpar campos'),
       style: OutlinedButton.styleFrom(
-        side: const BorderSide(color: Color(0xFF3A3A4A)),
+        side: const BorderSide(color: Color(0xFF2A2A3F)),
         foregroundColor: const Color(0xFFAAAAAA),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: const Text('Limpar'),
     );
   }
 }

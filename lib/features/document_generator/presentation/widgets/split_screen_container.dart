@@ -18,7 +18,7 @@ class SplitScreenContainer extends StatelessWidget {
         const VerticalDivider(
           width: 1,
           thickness: 1,
-          color: Color(0xFF3A3A4A),
+          color: Color(0xFF1A1A2E),
         ),
         Expanded(flex: 3, child: previewPanel),
       ],

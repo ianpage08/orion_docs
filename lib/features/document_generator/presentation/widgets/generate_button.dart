@@ -33,25 +33,26 @@ class _GenerateButtonState extends ConsumerState<GenerateButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       onPressed: _isGenerating ? null : _generate,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF6C63FF),
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        disabledBackgroundColor: const Color(0xFF4A4460),
-      ),
-      child: _isGenerating
+      icon: _isGenerating
           ? const SizedBox(
-              width: 18,
-              height: 18,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: Colors.white,
-              ),
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
             )
-          : const Text('Gerar PDF'),
+          : const Icon(Icons.download_rounded, size: 18),
+      label: const Text(
+        'GERAR PDF',
+        style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 0.8),
+      ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF00BCD4),
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        disabledBackgroundColor: const Color(0xFF006080),
+      ),
     );
   }
 }
