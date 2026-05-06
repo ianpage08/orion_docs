@@ -1,6 +1,12 @@
 # Git worktrees
 .worktrees/
 
+# Claude Code (dados pessoais de ferramenta)
+.claude/
+
+# Visual Studio workspace local
+.vs/
+
 # Miscellaneous
 *.class
 *.log
