@@ -1,0 +1,18 @@
+{
+  "id": "recibo_aluguel",
+  "title": "Declaração de Compra e Venda de Imóvel",
+  "fields": [
+    { "id": "valor_transacao", "label": "Valor da Transação", "type": "currency", "required": true },
+    { "id": "nome_vendedor", "label": "Nome do Vendedor", "type": "text", "required": true },
+    { "id": "cpf_vendedor", "label": "CPF do Vendedor", "type": "cpf", "required": true },
+    { "id": "rg_vendedor", "label": "RG do Vendedor", "type": "text", "required": true },
+    { "id": "nome_comprador", "label": "Nome do Comprador", "type": "text", "required": true },
+    { "id": "cpf_comprador", "label": "CPF do Comprador", "type": "cpf", "required": true },
+    { "id": "rg_comprador", "label": "RG do Comprador", "type": "text", "required": true },
+    { "id": "descricao_imovel", "label": "Descrição do Imóvel", "type": "multiline", "required": true },
+    { "id": "medidas_imovel", "label": "Medidas do Imóvel", "type": "text", "required": true },
+    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  ],
+  "template": "DECLARAÇÃO DE COMPRA E VENDA DE IMÓVEL\n\nPelo presente instrumento, declaro para os devidos fins que:\n\nVENDEDOR: {{nome_vendedor}}, RG: {{rg_vendedor}}, CPF: {{cpf_vendedor}}.\n\nCOMPRADOR: {{nome_comprador}}, RG: {{rg_comprador}}, CPF: {{cpf_comprador}}.\n\nFoi realizada a compra e venda do seguinte imóvel:\n\n{{descricao_imovel}}\n\nMedidas: {{medidas_imovel}}\n\nValor total da transação: {{valor_transacao}}.\n\nDeclaro que a transação foi realizada de comum acordo entre as partes, estando o imóvel livre de quaisquer ônus.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\nVENDEDOR: ___________________________\n{{nome_vendedor}} — CPF: {{cpf_vendedor}}\n\nCOMPRADOR: ___________________________\n{{nome_comprador}} — CPF: {{cpf_comprador}}\n\nTestemunhas:\n\n1ª ___________________________    CPF: _______________\n\n2ª ___________________________    CPF: _______________"
+}

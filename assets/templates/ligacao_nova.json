@@ -1,0 +1,13 @@
+{
+  "id": "ligacao_nova",
+  "title": "Requerimento de Ligação Nova de Água",
+  "fields": [
+    { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
+    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
+    { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
+    { "id": "cep_requerente", "label": "CEP", "type": "text", "required": true },
+    { "id": "local_imovel", "label": "Localização do Imóvel", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  ],
+  "template": "REQUERIMENTO DE LIGAÇÃO NOVA DE ÁGUA\n\nAo Serviço de Abastecimento de Água — EMBASA\n\nEu, {{nome_requerente}}, CPF: {{cpf_requerente}}, residente na {{endereco_requerente}}, CEP: {{cep_requerente}}, venho por meio desta solicitar a ligação nova de água para o imóvel localizado em {{local_imovel}}.\n\nDeclaro que as informações acima são verdadeiras e me comprometo a arcar com as taxas e custos decorrentes da ligação.\n\nNestes termos, pede deferimento.\n\n{{data_assinatura}}.\n\n___________________________\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
+}
