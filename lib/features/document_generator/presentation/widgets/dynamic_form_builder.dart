@@ -23,43 +23,46 @@ class DynamicFormBuilder extends ConsumerWidget {
 
     return ColoredBox(
       color: const Color(0xFF1E1E2E),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                Text(
-                  document.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  Text(
+                    document.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                ...document.fields.map(
-                  (field) =>
-                      FormFieldWidget(key: ValueKey(field.id), field: field),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  ...document.fields.map(
+                    (field) =>
+                        FormFieldWidget(key: ValueKey(field.id), field: field),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: const BoxDecoration(
-              color: Color(0xFF1A1A2A),
-              border: Border(top: BorderSide(color: Color(0xFF3A3A4A))),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: const BoxDecoration(
+                color: Color(0xFF1A1A2A),
+                border: Border(top: BorderSide(color: Color(0xFF3A3A4A))),
+              ),
+              child: const Row(
+                children: [
+                  Expanded(child: GenerateButton()),
+                  SizedBox(width: 12),
+                  ClearButton(),
+                ],
+              ),
             ),
-            child: const Row(
-              children: [
-                Expanded(child: GenerateButton()),
-                SizedBox(width: 12),
-                ClearButton(),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

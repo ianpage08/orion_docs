@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:printing/printing.dart';
 import '../../domain/usecases/generate_pdf.dart';
 import '../providers/document_providers.dart';
 
@@ -22,7 +22,10 @@ class _GenerateButtonState extends ConsumerState<GenerateButton> {
     setState(() => _isGenerating = true);
     try {
       final Uint8List bytes = await const GeneratePdf()(document);
-      await Printing.layoutPdf(onLayout: (_) => bytes);
+      final safeTitle = document.title.replaceAll(RegExp(r'[<>:"/\\|?*]'), '_');
+      final file = File('${Directory.systemTemp.path}/$safeTitle.pdf');
+      await file.writeAsBytes(bytes, flush: true);
+      await Process.run('cmd', ['/c', 'start', '', file.path]);
     } finally {
       if (mounted) setState(() => _isGenerating = false);
     }

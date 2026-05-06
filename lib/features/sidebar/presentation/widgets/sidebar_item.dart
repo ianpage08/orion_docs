@@ -114,6 +114,8 @@ class _SidebarItemWidgetState extends ConsumerState<SidebarItemWidget> {
                         fontWeight:
                             isActive ? FontWeight.w500 : FontWeight.w400,
                       ),
+                      textAlign: TextAlign.left
+                      ,
                       overflow: TextOverflow.ellipsis,
                     ),
             ),

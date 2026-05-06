@@ -15,11 +15,23 @@ class FormFieldWidget extends ConsumerStatefulWidget {
 
 class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
   late final TextEditingController _controller;
+  MaskTextInputFormatter? _maskFormatter;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.field.value);
+    _maskFormatter = switch (widget.field.type) {
+      FieldType.cpf => MaskTextInputFormatter(
+          mask: '###.###.###-##',
+          filter: {'#': RegExp(r'\d')},
+        ),
+      FieldType.phone => MaskTextInputFormatter(
+          mask: '(##) #####-####',
+          filter: {'#': RegExp(r'\d')},
+        ),
+      _ => null,
+    };
   }
 
   @override
@@ -76,13 +88,11 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
     );
   }
 
-  Widget _buildMaskedField(String mask) {
+  Widget _buildMaskedField(String _) {
     return TextFormField(
       controller: _controller,
       onChanged: _onChanged,
-      inputFormatters: [
-        MaskTextInputFormatter(mask: mask, filter: {'#': RegExp(r'\d')}),
-      ],
+      inputFormatters: [if (_maskFormatter != null) _maskFormatter!],
       keyboardType: TextInputType.number,
       style: const TextStyle(color: Colors.white, fontSize: 14),
       decoration: _decoration(),

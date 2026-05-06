@@ -15,8 +15,10 @@ class SidebarHeader extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
+      padding: EdgeInsets.symmetric(
+        horizontal: isCollapsed ? AppSpacing.xs : AppSpacing.lg,
+        vertical: AppSpacing.lg,
+      ),
       child: Row(
         children: [
           _Logo(isDark: isDark),
@@ -33,8 +35,9 @@ class SidebarHeader extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-          ],
-          const SizedBox(width: AppSpacing.sm),
+            const SizedBox(width: AppSpacing.sm),
+          ] else
+            const Spacer(),
           _CollapseButton(isCollapsed: isCollapsed),
         ],
       ),
