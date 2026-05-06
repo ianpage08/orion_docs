@@ -7,7 +7,9 @@
     { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
     { "id": "telefone_requerente", "label": "Telefone do Requerente", "type": "phone", "required": true },
     { "id": "data_evento", "label": "Data do Evento", "type": "date", "required": true },
-    { "id": "local_evento", "label": "Local do Evento", "type": "text", "required": true }
+    { "id": "local_evento", "label": "Local do Evento", "type": "text", "required": true },
+    { "id": "horario_inicio", "label": "Horário de Início", "type": "text", "required": true },
+    { "id": "horario_fim", "label": "Horário de Término", "type": "text", "required": true }
   ],
-  "template": "COMUNICAÇÃO DE AUTORIZAÇÃO PARA FESTA\n\nAo Comando da Polícia Militar\n\nEu, {{nome_requerente}}, residente em {{endereco_requerente}}, CPF: {{cpf_requerente}}, telefone: {{telefone_requerente}}, venho por meio desta comunicar a realização de uma festa/evento na data de {{data_evento}}, no local: {{local_evento}}.\n\nO evento contará com música ao vivo, com início às 20h00 e término às 02h00.\n\nDeclaro estar ciente das normas vigentes e me comprometo a manter a ordem e o respeito ao sossego público.\n\nAtenciosamente,\n\n___________________________\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
+  "template": "COMUNICAÇÃO DE AUTORIZAÇÃO PARA FESTA\n\nAo Comando da Polícia Militar\n\nEu, {{nome_requerente}}, residente em {{endereco_requerente}}, CPF: {{cpf_requerente}}, telefone: {{telefone_requerente}}, venho por meio desta comunicar a realização de uma festa/evento na data de {{data_evento}}, no local: {{local_evento}}.\n\nO evento contará com música ao vivo, com início às {{horario_inicio}} e término às {{horario_fim}}.\n\nDeclaro estar ciente das normas vigentes e me comprometo a manter a ordem e o respeito ao sossego público.\n\nAtenciosamente,\n\n___________________________\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
 }

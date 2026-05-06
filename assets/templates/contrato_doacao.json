@@ -4,8 +4,8 @@
   "fields": [
     { "id": "nome_doador1", "label": "Nome do Doador 1", "type": "text", "required": true },
     { "id": "cpf_doador1", "label": "CPF do Doador 1", "type": "cpf", "required": true },
-    { "id": "nome_doador2", "label": "Nome do Doador 2", "type": "text", "required": false },
-    { "id": "cpf_doador2", "label": "CPF do Doador 2", "type": "cpf", "required": false },
+    { "id": "nome_doador2", "label": "Nome do Doador 2", "type": "text", "required": true },
+    { "id": "cpf_doador2", "label": "CPF do Doador 2", "type": "cpf", "required": true },
     { "id": "endereco_doador", "label": "Endereço dos Doadores", "type": "text", "required": true },
     { "id": "nome_donatario", "label": "Nome do Donatário", "type": "text", "required": true },
     { "id": "cpf_donatario", "label": "CPF do Donatário", "type": "cpf", "required": true },
