@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
+import 'features/document_generator/presentation/pages/document_generator_page.dart';
 import 'features/sidebar/presentation/widgets/sidebar.dart';
 
 void main() {
@@ -34,36 +35,9 @@ class _AppShell extends StatelessWidget {
         child: Row(
           children: [
             AppSidebar(),
-            Expanded(child: _ContentPlaceholder()),
+            Expanded(child: DocumentGeneratorPage()),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _ContentPlaceholder extends StatelessWidget {
-  const _ContentPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Icons.auto_stories_rounded,
-            size: 52,
-            color: AppColors.textMuted,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Selecione um documento',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.textMuted,
-                ),
-          ),
-        ],
       ),
     );
   }

@@ -1,0 +1,16 @@
+{
+  "id": "recibo_aluguel",
+  "title": "Recibo de Aluguel",
+  "fields": [
+    { "id": "nome_locador", "label": "Nome do Locador", "type": "text", "required": true },
+    { "id": "cpf_locador", "label": "CPF do Locador", "type": "cpf", "required": true },
+    { "id": "nome_locatario", "label": "Nome do Locatário", "type": "text", "required": true },
+    { "id": "cpf_locatario", "label": "CPF do Locatário", "type": "cpf", "required": true },
+    { "id": "endereco_imovel", "label": "Endereço do Imóvel", "type": "text", "required": true },
+    { "id": "valor_aluguel", "label": "Valor do Aluguel", "type": "currency", "required": true },
+    { "id": "mes_referencia", "label": "Mês de Referência", "type": "text", "required": true },
+    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  ],
+  "template": "RECIBO DE ALUGUEL\n\nRecebo eu, {{nome_locador}}, CPF: {{cpf_locador}}, a quantia de {{valor_aluguel}}, referente ao aluguel do mês de {{mes_referencia}}, do imóvel situado em {{endereco_imovel}}, pago pelo(a) locatário(a) {{nome_locatario}}, CPF: {{cpf_locatario}}.\n\nDeclaro que recebi o valor acima, dando plena e total quitação referente ao período indicado.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n___________________________\n{{nome_locador}}\nCPF: {{cpf_locador}}"
+}

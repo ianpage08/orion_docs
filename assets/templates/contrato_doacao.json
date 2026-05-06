@@ -1,0 +1,18 @@
+{
+  "id": "contrato_doacao",
+  "title": "Contrato de Doação Pura e Simples",
+  "fields": [
+    { "id": "nome_doador1", "label": "Nome do Doador 1", "type": "text", "required": true },
+    { "id": "cpf_doador1", "label": "CPF do Doador 1", "type": "cpf", "required": true },
+    { "id": "nome_doador2", "label": "Nome do Doador 2", "type": "text", "required": true },
+    { "id": "cpf_doador2", "label": "CPF do Doador 2", "type": "cpf", "required": true },
+    { "id": "endereco_doador", "label": "Endereço dos Doadores", "type": "text", "required": true },
+    { "id": "nome_donatario", "label": "Nome do Donatário", "type": "text", "required": true },
+    { "id": "cpf_donatario", "label": "CPF do Donatário", "type": "cpf", "required": true },
+    { "id": "endereco_donatario", "label": "Endereço do Donatário", "type": "text", "required": true },
+    { "id": "descricao_imovel", "label": "Descrição do Imóvel", "type": "multiline", "required": true },
+    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  ],
+  "template": "CONTRATO DE DOAÇÃO PURA E SIMPLES\n\nPelo presente instrumento particular:\n\nDOADOR(ES): {{nome_doador1}}, CPF: {{cpf_doador1}}; {{nome_doador2}}, CPF: {{cpf_doador2}}.\nResidentes em: {{endereco_doador}}.\n\nDONATÁRIO(A): {{nome_donatario}}, CPF: {{cpf_donatario}}.\nResidente em: {{endereco_donatario}}.\n\nO(s) DOADOR(ES), de forma pura e simples, doa(m) ao DONATÁRIO o seguinte bem imóvel:\n\n{{descricao_imovel}}\n\nO DONATÁRIO aceita a presente doação nos termos acima descritos, declarando estar ciente de todas as condições.\n\nE por estarem assim justos e contratados, firmam o presente instrumento.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\nDOADOR 1: ___________________________\n{{nome_doador1}} — CPF: {{cpf_doador1}}\n\nDOADOR 2: ___________________________\n{{nome_doador2}} — CPF: {{cpf_doador2}}\n\nDONATÁRIO: ___________________________\n{{nome_donatario}} — CPF: {{cpf_donatario}}\n\nTestemunhas:\n\n1ª ___________________________    CPF: _______________\n\n2ª ___________________________    CPF: _______________"
+}
