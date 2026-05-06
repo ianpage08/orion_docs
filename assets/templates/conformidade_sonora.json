@@ -4,12 +4,14 @@
   "fields": [
     { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
     { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
-    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
     { "id": "telefone_requerente", "label": "Telefone do Requerente", "type": "phone", "required": true },
+    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
     { "id": "data_evento", "label": "Data do Evento", "type": "date", "required": true },
-    { "id": "local_evento", "label": "Local do Evento", "type": "text", "required": true },
     { "id": "horario_inicio", "label": "Horário de Início", "type": "text", "required": true },
-    { "id": "horario_fim", "label": "Horário de Término", "type": "text", "required": true }
+    { "id": "horario_fim", "label": "Horário de Término", "type": "text", "required": true },
+    { "id": "local_evento", "label": "Local do Evento", "type": "text", "required": true },
+    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "COMUNICAÇÃO DE AUTORIZAÇÃO PARA FESTA\n\nAo Comando da Polícia Militar\n\nEu, {{nome_requerente}}, residente em {{endereco_requerente}}, CPF: {{cpf_requerente}}, telefone: {{telefone_requerente}}, venho por meio desta comunicar a realização de uma festa/evento na data de {{data_evento}}, no local: {{local_evento}}.\n\nO evento contará com música ao vivo, com início às {{horario_inicio}} e término às {{horario_fim}}.\n\nDeclaro estar ciente das normas vigentes e me comprometo a manter a ordem e o respeito ao sossego público.\n\nAtenciosamente,\n\n___________________________\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
+  "template": "Comunicação de autorização para festa\n\n{{nome_requerente}}\n{{endereco_requerente}}\nTelefone: {{telefone_requerente}}\nCPF: {{cpf_requerente}}\n\nÀ\nPolícia Militar\n\nAssunto: Solicitação de autorização para realização de evento festivo\n\nPrezados(as) Senhores(as),\n\nEu, {{nome_requerente}}, residente na {{endereco_requerente}}, venho, por meio desta, comunicar e solicitar autorização para a realização de um evento festivo conforme os dados abaixo:\n\nTipo de evento: Festa com música ao vivo\nData: {{data_evento}}\nHorário: Das {{horario_inicio}} às {{horario_fim}}\nLocal: {{local_evento}}\nSom: Música ao vivo\n\nComprometo-me a respeitar os limites legais de horário e volume de som, bem como as normas de convivência e segurança vigentes. Estou à disposição para prestar esclarecimentos e atender a quaisquer orientações que se façam necessárias.\n\nDesde já, agradeço pela atenção e colaboração.\n\nAtenciosamente,\n\n{{local_assinatura}}, {{data_assinatura}}\n\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
 }

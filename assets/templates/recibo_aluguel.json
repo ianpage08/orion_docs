@@ -1,16 +1,19 @@
 {
   "id": "recibo_aluguel",
-  "title": "Recibo de Aluguel",
+  "title": "Declaração de Compra e Venda de Imóvel",
   "fields": [
-    { "id": "nome_locador", "label": "Nome do Locador", "type": "text", "required": true },
-    { "id": "cpf_locador", "label": "CPF do Locador", "type": "cpf", "required": true },
-    { "id": "nome_locatario", "label": "Nome do Locatário", "type": "text", "required": true },
-    { "id": "cpf_locatario", "label": "CPF do Locatário", "type": "cpf", "required": true },
-    { "id": "endereco_imovel", "label": "Endereço do Imóvel", "type": "text", "required": true },
-    { "id": "valor_aluguel", "label": "Valor do Aluguel", "type": "currency", "required": true },
-    { "id": "mes_referencia", "label": "Mês de Referência", "type": "text", "required": true },
+    { "id": "valor_transacao", "label": "Valor da Transação (ex: 4.000,00)", "type": "currency", "required": true },
+    { "id": "nome_vendedor", "label": "Nome do Vendedor (Declarante)", "type": "text", "required": true },
+    { "id": "cpf_vendedor", "label": "CPF do Vendedor", "type": "cpf", "required": true },
+    { "id": "rg_vendedor", "label": "RG do Vendedor", "type": "text", "required": true },
+    { "id": "endereco_vendedor", "label": "Endereço do Vendedor", "type": "text", "required": true },
+    { "id": "nome_comprador", "label": "Nome do Comprador", "type": "text", "required": true },
+    { "id": "cpf_comprador", "label": "CPF do Comprador", "type": "cpf", "required": true },
+    { "id": "rg_comprador", "label": "RG do Comprador", "type": "text", "required": true },
+    { "id": "endereco_comprador", "label": "Endereço do Comprador", "type": "text", "required": true },
+    { "id": "descricao_imovel", "label": "Descrição do Imóvel (área, medidas, localização)", "type": "multiline", "required": true },
     { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
     { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "RECIBO DE ALUGUEL\n\nRecebo eu, {{nome_locador}}, CPF: {{cpf_locador}}, a quantia de {{valor_aluguel}}, referente ao aluguel do mês de {{mes_referencia}}, do imóvel situado em {{endereco_imovel}}, pago pelo(a) locatário(a) {{nome_locatario}}, CPF: {{cpf_locatario}}.\n\nDeclaro que recebi o valor acima, dando plena e total quitação referente ao período indicado.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n___________________________\n{{nome_locador}}\nCPF: {{cpf_locador}}"
+  "template": "DECLARAÇÃO DE COMPRA E VENDA DE IMÓVEL\n\nValor da transação: R$ {{valor_transacao}}\n\nIMÓVEL RURAL\n\nEu, {{nome_vendedor}}, portador(a) do RG nº {{rg_vendedor}} e CPF: {{cpf_vendedor}}, brasileiro(a), maior e capaz, residente em {{endereco_vendedor}}, DECLARO para os devidos fins de direito, que recebi do(a) Sr./Sra. {{nome_comprador}}, portador(a) do RG nº {{rg_comprador}} e CPF: {{cpf_comprador}}, brasileiro(a), maior e capaz, residente e domiciliado(a) em {{endereco_comprador}}, a importância acima declarada, no valor de R$ {{valor_transacao}}, referente à venda que lhe fiz do seguinte imóvel:\n\n{{descricao_imovel}}\n\nQue a presente venda é feita em caráter irrevogável e irretratável, por si, seus herdeiros, sucessores e seus antecedentes, na forma expressa e verdadeira da lei.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n_______________________________________________\n{{nome_vendedor}}\nCPF: {{cpf_vendedor}}\nVendedor\n\n_______________________________________________\n{{nome_comprador}}\nCPF: {{cpf_comprador}}\nComprador\n\nTestemunhas:\n\n_______________________________________________\n\n_______________________________________________"
 }

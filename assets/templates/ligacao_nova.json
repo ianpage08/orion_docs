@@ -1,13 +1,13 @@
 {
   "id": "ligacao_nova",
-  "title": "Requerimento de Ligação Nova de Água",
+  "title": "Ofício à Embasa — Extensão de Rede",
   "fields": [
     { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
     { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
     { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
     { "id": "cep_requerente", "label": "CEP", "type": "text", "required": true },
-    { "id": "local_imovel", "label": "Localização do Imóvel", "type": "text", "required": true },
+    { "id": "local_imovel", "label": "Localização do Imóvel (endereço da ligação)", "type": "text", "required": true },
     { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "REQUERIMENTO DE LIGAÇÃO NOVA DE ÁGUA\n\nAo Serviço de Abastecimento de Água — EMBASA\n\nEu, {{nome_requerente}}, CPF: {{cpf_requerente}}, residente na {{endereco_requerente}}, CEP: {{cep_requerente}}, venho por meio desta solicitar a ligação nova de água para o imóvel localizado em {{local_imovel}}.\n\nDeclaro que as informações acima são verdadeiras e me comprometo a arcar com as taxas e custos decorrentes da ligação.\n\nNestes termos, pede deferimento.\n\n{{data_assinatura}}.\n\n___________________________\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
+  "template": "Ofício à Embasa\n\nAssunto: Extensão de rede\n\nEu, {{nome_requerente}}, portador(a) do CPF nº {{cpf_requerente}}, residente e domiciliado(a) à {{endereco_requerente}}, CEP: {{cep_requerente}},\n\nsolicitamos a ligação de água para a propriedade localizada em {{local_imovel}}.\n\nDeclaramos, outrossim, que arcaremos com o custo da retroescavadeira necessária para a realização da ligação.\n\nPara representar os Outorgantes neste procedimento, nomeamos e constituímos como nosso(a) bastante procurador(a), {{nome_requerente}}, portador(a) do CPF nº {{cpf_requerente}}, residente e domiciliado(a) à {{endereco_requerente}}, CEP: {{cep_requerente}},\n\npara, em meu nome e representação, solicitar e acompanhar o processo de ligação de água no imóvel situado no endereço acima mencionado, junto à Embasa, podendo o(a) Outorgado(a) praticar todos os atos necessários para o cumprimento deste mandato.\n\n{{data_assinatura}}\n\n______________________________________________\n{{nome_requerente}}\nCPF nº {{cpf_requerente}}"
 }

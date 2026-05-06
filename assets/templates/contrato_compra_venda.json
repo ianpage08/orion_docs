@@ -1,6 +1,6 @@
 {
   "id": "contrato_compra_venda",
-  "title": "Contrato de Compra e Venda",
+  "title": "Compromisso de Compra e Venda de Imóvel",
   "fields": [
     { "id": "nome_vendedor", "label": "Nome do Vendedor", "type": "text", "required": true },
     { "id": "cpf_vendedor", "label": "CPF do Vendedor", "type": "cpf", "required": true },
@@ -10,11 +10,11 @@
     { "id": "cpf_comprador", "label": "CPF do Comprador", "type": "cpf", "required": true },
     { "id": "rg_comprador", "label": "RG do Comprador", "type": "text", "required": true },
     { "id": "endereco_comprador", "label": "Endereço do Comprador", "type": "text", "required": true },
-    { "id": "descricao_imovel", "label": "Descrição do Imóvel", "type": "multiline", "required": true },
-    { "id": "valor_venda", "label": "Valor da Venda", "type": "currency", "required": true },
+    { "id": "descricao_imovel", "label": "Descrição do Imóvel (tipo, área, localização, confrontações)", "type": "multiline", "required": true },
+    { "id": "valor_venda", "label": "Valor da Venda (ex: 35.000,00)", "type": "currency", "required": true },
     { "id": "forma_pagamento", "label": "Forma de Pagamento", "type": "text", "required": true },
     { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
     { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "CONTRATO DE COMPRA E VENDA\n\nPelo presente instrumento particular:\n\nVENDEDOR: {{nome_vendedor}}, RG: {{rg_vendedor}}, CPF: {{cpf_vendedor}}, residente em {{endereco_vendedor}}.\n\nCOMPRADOR: {{nome_comprador}}, RG: {{rg_comprador}}, CPF: {{cpf_comprador}}, residente em {{endereco_comprador}}.\n\n1. OBJETO\nO VENDEDOR vende ao COMPRADOR o seguinte imóvel:\n\n{{descricao_imovel}}\n\n2. PREÇO E FORMA DE PAGAMENTO\nO imóvel é vendido pelo valor de {{valor_venda}}, a ser pago da seguinte forma: {{forma_pagamento}}.\n\n3. TRANSFERÊNCIA\nO VENDEDOR declara que o imóvel está livre e desembaraçado de quaisquer ônus, dívidas ou responsabilidades.\n\nE por estarem assim justos e contratados, firmam o presente instrumento.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\nVENDEDOR: ___________________________\n{{nome_vendedor}}\n\nCOMPRADOR: ___________________________\n{{nome_comprador}}\n\nTestemunhas:\n\n1ª ___________________________    CPF: _______________\n\n2ª ___________________________    CPF: _______________"
+  "template": "Compromisso de Compra e Venda de Imóvel\n\nPelo presente compromisso de Compra e Venda de imóvel, de um lado {{nome_vendedor}}, brasileiro(a), maior, portador(a) da RG {{rg_vendedor}} e CPF: {{cpf_vendedor}}, residente e domiciliado(a) em {{endereco_vendedor}}, ora em diante chamado(a) de promitente VENDEDOR, e do outro lado {{nome_comprador}}, brasileiro(a), maior, portador(a) da RG: {{rg_comprador}} e CPF: {{cpf_comprador}}, residente e domiciliado(a) em {{endereco_comprador}}, de ora em diante chamado(a) de promitente COMPRADOR, justamente contratam o presente compromisso de Compra e Venda de imóvel conforme as cláusulas seguintes:\n\n1 – O primeiro acima qualificado, ora em diante chamado de dono e possuidor do seguinte imóvel:\n\n{{descricao_imovel}}\n\nresolve por livre e espontânea vontade vender o referido imóvel acima citado ao segundo acima qualificado conforme as condições e cláusulas seguintes.\n\n2 – O preço do imóvel é de R$ {{valor_venda}}, pago {{forma_pagamento}}, de cujo recebimento o(a) vendedor(a) dá plena e geral quitação, nada tendo a reclamar seja no presente ou no futuro, obrigando a si e seus herdeiros e sucessores legais a respeitar todas as cláusulas deste instrumento particular de compra e venda.\n\n3 – O(A) vendedor(a), neste ato, passa o direito de posse legal ao(à) comprador(a), podendo o(a) mesmo(a) vender, trocar, doar, usufruir ou fazer o melhor que lhe convier, sem impedimento algum por parte do(a) vendedor(a) ou sucessor que por ventura venha a reclamar.\n\nPor se acharem de acordo, nada tendo a reclamar, vendedor e comprador assinam o presente instrumento em igual forma e teor, juntamente com as testemunhas.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n______________________________________________\n{{nome_vendedor}} CPF – {{cpf_vendedor}}\n\n______________________________________________\n{{nome_comprador}} CPF – {{cpf_comprador}}\n\nTestemunhas:\n\n01 – _____________________________________________\n02 – _____________________________________________"
 }

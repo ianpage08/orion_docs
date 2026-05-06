@@ -3,16 +3,16 @@
   "title": "Procuração — Alteração de Titularidade",
   "fields": [
     { "id": "nome_outorgante", "label": "Nome do Outorgante", "type": "text", "required": true },
-    { "id": "cpf_outorgante", "label": "CPF do Outorgante", "type": "cpf", "required": true },
     { "id": "rg_outorgante", "label": "RG do Outorgante", "type": "text", "required": true },
-    { "id": "endereco_outorgante", "label": "Endereço do Outorgante", "type": "text", "required": true },
+    { "id": "cpf_outorgante", "label": "CPF do Outorgante", "type": "cpf", "required": true },
+    { "id": "endereco_outorgante", "label": "Endereço do Outorgante (com CEP)", "type": "text", "required": true },
     { "id": "nome_outorgado", "label": "Nome do Outorgado", "type": "text", "required": true },
-    { "id": "cpf_outorgado", "label": "CPF do Outorgado", "type": "cpf", "required": true },
     { "id": "rg_outorgado", "label": "RG do Outorgado", "type": "text", "required": true },
-    { "id": "endereco_outorgado", "label": "Endereço do Outorgado", "type": "text", "required": true },
+    { "id": "cpf_outorgado", "label": "CPF do Outorgado", "type": "cpf", "required": true },
+    { "id": "endereco_outorgado", "label": "Endereço do Outorgado (com CEP)", "type": "text", "required": true },
     { "id": "numero_unidade_consumidora", "label": "Número da Unidade Consumidora", "type": "text", "required": true },
-    { "id": "endereco_imovel", "label": "Endereço do Imóvel", "type": "text", "required": true },
+    { "id": "endereco_imovel", "label": "Endereço do Imóvel (com CEP)", "type": "text", "required": true },
     { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "PROCURAÇÃO\n\nEu, {{nome_outorgante}}, brasileiro(a), RG: {{rg_outorgante}}, CPF: {{cpf_outorgante}}, residente em {{endereco_outorgante}}, pelo presente instrumento de procuração, nomeio e constituo meu(minha) bastante procurador(a) o(a) Sr.(Sra.) {{nome_outorgado}}, RG: {{rg_outorgado}}, CPF: {{cpf_outorgado}}, residente em {{endereco_outorgado}}.\n\nOutorgo ao(à) procurador(a) poderes para representar-me junto à EMBASA, para fins de transferência de titularidade da unidade consumidora de número {{numero_unidade_consumidora}}, referente ao imóvel situado em {{endereco_imovel}}.\n\nDeclaro que esta procuração é válida para todos os atos necessários à consecução do objetivo acima.\n\n{{data_assinatura}}.\n\nOUTORGANTE: ___________________________\n{{nome_outorgante}}\nCPF: {{cpf_outorgante}}\n\nOUTORGADO: ___________________________\n{{nome_outorgado}}\nCPF: {{cpf_outorgado}}\n\nTestemunhas:\n\n1ª ___________________________    CPF: _______________\n\n2ª ___________________________    CPF: _______________"
+  "template": "PROCURAÇÃO\n\nEu, {{nome_outorgante}}, brasileiro(a), portador(a) do RG nº {{rg_outorgante}} e CPF nº {{cpf_outorgante}}, residente e domiciliado(a) à {{endereco_outorgante}}, no ato outorgante, e\n\n{{nome_outorgado}}, brasileiro(a), portador(a) do RG nº {{rg_outorgado}} e CPF nº {{cpf_outorgado}}, residente e domiciliado(a) à {{endereco_outorgado}}, no ato outorgado,\n\nD E C L A R O:\n\nQue, por este instrumento particular de mandato, o(a) outorgante nomeia e constitui o(a) outorgado(a) como seu(ua) bastante procurador(a), para, em seu nome e em seu lugar, realizar todos os atos necessários à transferência da titularidade da unidade consumidora de água nº {{numero_unidade_consumidora}} que fica situado em {{endereco_imovel}}, para o nome do(a) outorgado(a), junto à Empresa Baiana de Águas e Saneamento (EMBASA), com sede nesta cidade.\n\n{{data_assinatura}}.\n\n{{nome_outorgante}} – CPF nº {{cpf_outorgante}}\n\n{{nome_outorgado}} – CPF nº {{cpf_outorgado}}"
 }
