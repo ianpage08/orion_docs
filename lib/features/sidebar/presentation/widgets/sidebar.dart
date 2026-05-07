@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -22,53 +21,43 @@ class AppSidebar extends ConsumerWidget {
       width: state.isCollapsed
           ? AppSpacing.sidebarCollapsed
           : AppSpacing.sidebarExpanded,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(AppSpacing.borderRadius),
-          bottomRight: Radius.circular(AppSpacing.borderRadius),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: Container(
-            decoration: BoxDecoration(
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark
+              ? AppColors.sidebarSurface
+              : AppColors.lightSidebarSurface,
+          border: Border(
+            right: BorderSide(
               color: isDark
-                  ? AppColors.sidebarSurface
-                  : AppColors.lightSidebarSurface,
-              border: Border(
-                right: BorderSide(
-                  color: isDark
-                      ? AppColors.sidebarBorder
-                      : AppColors.lightSidebarBorder,
+                  ? AppColors.sidebarBorder
+                  : AppColors.lightSidebarBorder,
+            ),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SidebarHeader(isCollapsed: state.isCollapsed),
+            Divider(
+              height: 1,
+              color: isDark
+                  ? AppColors.sidebarBorder
+                  : AppColors.lightSidebarBorder,
+            ),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                itemCount: groups.length,
+                separatorBuilder: (_, __) =>
+                    const SizedBox(height: AppSpacing.xs),
+                itemBuilder: (_, i) => SidebarGroupWidget(
+                  key: ValueKey(groups[i].id),
+                  group: groups[i],
+                  isCollapsed: state.isCollapsed,
                 ),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SidebarHeader(isCollapsed: state.isCollapsed),
-                Divider(
-                  height: 1,
-                  color: isDark
-                      ? AppColors.sidebarBorder
-                      : AppColors.lightSidebarBorder,
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppSpacing.md),
-                    itemCount: groups.length,
-                    separatorBuilder: (_, __) =>
-                        const SizedBox(height: AppSpacing.xs),
-                    itemBuilder: (_, i) => SidebarGroupWidget(
-                      key: ValueKey(groups[i].id),
-                      group: groups[i],
-                      isCollapsed: state.isCollapsed,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ],
         ),
       ),
     );

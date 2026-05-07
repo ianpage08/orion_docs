@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/usecases/generate_pdf.dart';
 import '../providers/document_providers.dart';
+import '../../../../core/platform/pdf_downloader.dart';
 
 class GenerateButton extends ConsumerStatefulWidget {
   const GenerateButton({super.key});
@@ -23,9 +23,7 @@ class _GenerateButtonState extends ConsumerState<GenerateButton> {
     try {
       final Uint8List bytes = await const GeneratePdf()(document);
       final safeTitle = document.title.replaceAll(RegExp(r'[<>:"/\\|?*]'), '_');
-      final file = File('${Directory.systemTemp.path}/$safeTitle.pdf');
-      await file.writeAsBytes(bytes, flush: true);
-      await Process.run('cmd', ['/c', 'start', '', file.path]);
+      await downloadPdf('$safeTitle.pdf', bytes);
     } finally {
       if (mounted) setState(() => _isGenerating = false);
     }
