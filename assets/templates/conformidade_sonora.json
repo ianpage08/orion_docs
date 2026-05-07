@@ -1,17 +1,182 @@
 {
   "id": "conformidade_sonora",
+  "version": "2.0.0",
   "title": "Comunicação de Autorização para Festa — Polícia",
-  "fields": [
-    { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
-    { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
-    { "id": "telefone_requerente", "label": "Telefone do Requerente", "type": "phone", "required": true },
-    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
-    { "id": "data_evento", "label": "Data do Evento", "type": "date", "required": true },
-    { "id": "horario_inicio", "label": "Horário de Início", "type": "text", "required": true },
-    { "id": "horario_fim", "label": "Horário de Término", "type": "text", "required": true },
-    { "id": "local_evento", "label": "Local do Evento", "type": "text", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "autorizacao",
+  "description": "Ofício dirigido à Polícia Militar solicitando autorização para realização de evento festivo com música.",
+  "tags": ["festa", "evento", "música", "polícia", "autorização", "som"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "requerente",
+      "title": "Dados do Requerente",
+      "icon": "person",
+      "description": "Responsável pelo evento",
+      "fields": ["nome_requerente", "cpf_requerente", "endereco_requerente", "telefone_requerente"]
+    },
+    {
+      "id": "evento",
+      "title": "Dados do Evento",
+      "icon": "celebration",
+      "fields": ["data_evento", "horario_inicio", "horario_fim", "local_evento"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_requerente",
+      "label": "Nome do Requerente",
+      "hint": "Nome completo do responsável pelo evento",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_requerente",
+      "label": "CPF do Requerente",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_requerente",
+      "label": "Endereço do Requerente",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "telefone_requerente",
+      "label": "Telefone do Requerente",
+      "hint": "(00) 00000-0000",
+      "type": "phone",
+      "width": "half",
+      "required": true,
+      "icon": "phone",
+      "mask": "(##) #####-####",
+      "validation": { "message": "Informe um telefone válido com DDD" }
+    },
+    {
+      "id": "data_evento",
+      "label": "Data do Evento",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "event"
+    },
+    {
+      "id": "horario_inicio",
+      "label": "Horário de Início",
+      "hint": "Ex: 18:00",
+      "type": "time",
+      "width": "half",
+      "required": true,
+      "icon": "schedule",
+      "mask": "##:##"
+    },
+    {
+      "id": "horario_fim",
+      "label": "Horário de Término",
+      "hint": "Ex: 23:00",
+      "type": "time",
+      "width": "half",
+      "required": true,
+      "icon": "timer_off",
+      "mask": "##:##",
+      "validation": { "afterField": "horario_inicio", "message": "Horário de término deve ser posterior ao início" }
+    },
+    {
+      "id": "local_evento",
+      "label": "Local do Evento",
+      "hint": "Endereço completo onde ocorrerá o evento",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "place",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo do evento" }
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "normal"
+    },
+    "signingBlocks": [
+      { "role": "Requerente", "nameField": "nome_requerente", "cpfField": "cpf_requerente" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Lei Federal nº 9.503/97; Lei nº 10.406/02",
+    "jurisdiction": "Brasil",
+    "notes": "Protocolar junto à delegacia ou batalhão da PM responsável pela área com antecedência mínima de 48 horas.",
+    "estimatedTime": "4 min",
+    "color": "#F9A825"
+  },
+
   "template": "Comunicação de autorização para festa\n\n{{nome_requerente}}\n{{endereco_requerente}}\nTelefone: {{telefone_requerente}}\nCPF: {{cpf_requerente}}\n\nÀ\nPolícia Militar\n\nAssunto: Solicitação de autorização para realização de evento festivo\n\nPrezados(as) Senhores(as),\n\nEu, {{nome_requerente}}, residente na {{endereco_requerente}}, venho, por meio desta, comunicar e solicitar autorização para a realização de um evento festivo conforme os dados abaixo:\n\nTipo de evento: Festa com música ao vivo\nData: {{data_evento}}\nHorário: Das {{horario_inicio}} às {{horario_fim}}\nLocal: {{local_evento}}\nSom: Música ao vivo\n\nComprometo-me a respeitar os limites legais de horário e volume de som, bem como as normas de convivência e segurança vigentes. Estou à disposição para prestar esclarecimentos e atender a quaisquer orientações que se façam necessárias.\n\nDesde já, agradeço pela atenção e colaboração.\n\nAtenciosamente,\n\n{{local_assinatura}}, {{data_assinatura}}\n\n{{nome_requerente}}\nCPF: {{cpf_requerente}}"
 }

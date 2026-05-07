@@ -1,16 +1,183 @@
 {
   "id": "alteracao_titularidade",
+  "version": "2.0.0",
   "title": "Procuração — Alteração de Titularidade",
-  "fields": [
-    { "id": "nome_outorgante", "label": "Nome do Outorgante", "type": "text", "required": true },
-    { "id": "cpf_outorgante", "label": "CPF do Outorgante", "type": "cpf", "required": true },
-    { "id": "endereco_outorgante", "label": "Endereço do Outorgante (com CEP)", "type": "text", "required": true },
-    { "id": "nome_outorgado", "label": "Nome do Outorgado", "type": "text", "required": true },
-    { "id": "cpf_outorgado", "label": "CPF do Outorgado", "type": "cpf", "required": true },
-    { "id": "endereco_outorgado", "label": "Endereço do Outorgado (com CEP)", "type": "text", "required": true },
-    { "id": "numero_unidade_consumidora", "label": "Número da Unidade Consumidora", "type": "text", "required": true },
-    { "id": "endereco_imovel", "label": "Endereço do Imóvel (com CEP)", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "procuracao",
+  "description": "Procuração particular para transferência de titularidade de unidade consumidora de água junto à Embasa.",
+  "tags": ["procuração", "embasa", "titularidade", "água", "transferência", "outorgante", "outorgado"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "outorgante",
+      "title": "Dados do Outorgante",
+      "icon": "person",
+      "description": "Titular atual que concede os poderes",
+      "fields": ["nome_outorgante", "cpf_outorgante", "endereco_outorgante"]
+    },
+    {
+      "id": "outorgado",
+      "title": "Dados do Outorgado",
+      "icon": "person_outline",
+      "description": "Pessoa que receberá os poderes para agir",
+      "fields": ["nome_outorgado", "cpf_outorgado", "endereco_outorgado"]
+    },
+    {
+      "id": "unidade",
+      "title": "Unidade Consumidora",
+      "icon": "water_drop",
+      "description": "Dados do imóvel e da ligação de água",
+      "fields": ["numero_unidade_consumidora", "endereco_imovel"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_outorgante",
+      "label": "Nome do Outorgante",
+      "hint": "Nome completo do atual titular",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_outorgante",
+      "label": "CPF do Outorgante",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_outorgante",
+      "label": "Endereço do Outorgante (com CEP)",
+      "hint": "Rua, número, bairro, cidade — UF, CEP",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo com CEP" }
+    },
+    {
+      "id": "nome_outorgado",
+      "label": "Nome do Outorgado",
+      "hint": "Nome completo de quem receberá os poderes",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person_outline",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_outorgado",
+      "label": "CPF do Outorgado",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_outorgado",
+      "label": "Endereço do Outorgado (com CEP)",
+      "hint": "Rua, número, bairro, cidade — UF, CEP",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo com CEP" }
+    },
+    {
+      "id": "numero_unidade_consumidora",
+      "label": "Número da Unidade Consumidora",
+      "hint": "Número da matrícula/UC constante na conta de água",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "water_drop",
+      "validation": { "minLength": 3, "message": "Informe o número da unidade consumidora" }
+    },
+    {
+      "id": "endereco_imovel",
+      "label": "Endereço do Imóvel (com CEP)",
+      "hint": "Endereço da unidade consumidora a ser transferida",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "home",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo com CEP" }
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "bold"
+    },
+    "signingBlocks": [
+      { "role": "Outorgante", "nameField": "nome_outorgante", "cpfField": "cpf_outorgante" },
+      { "role": "Outorgado",  "nameField": "nome_outorgado",  "cpfField": "cpf_outorgado" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Código Civil Brasileiro — Arts. 653–692 (Mandato); regulamento da Embasa",
+    "jurisdiction": "Bahia — Brasil",
+    "notes": "Reconhecimento de firma em cartório pode ser exigido pela Embasa. Apresentar cópia dos documentos de ambas as partes.",
+    "estimatedTime": "4 min",
+    "color": "#6D4C41"
+  },
+
   "template": "PROCURAÇÃO\n\nEu, {{nome_outorgante}}, brasileiro(a), portador(a) do CPF nº {{cpf_outorgante}}, residente e domiciliado(a) à {{endereco_outorgante}}, no ato outorgante, e\n\n{{nome_outorgado}}, brasileiro(a), portador(a) do CPF nº {{cpf_outorgado}}, residente e domiciliado(a) à {{endereco_outorgado}}, no ato outorgado,\n\nD E C L A R O:\n\nQue, por este instrumento particular de mandato, o(a) outorgante nomeia e constitui o(a) outorgado(a) como seu(ua) bastante procurador(a), para, em seu nome e em seu lugar, realizar todos os atos necessários à transferência da titularidade da unidade consumidora de água nº {{numero_unidade_consumidora}} que fica situado em {{endereco_imovel}}, para o nome do(a) outorgado(a), junto à Empresa Baiana de Águas e Saneamento (EMBASA), com sede nesta cidade.\n\n{{data_assinatura}}.\n\n{{nome_outorgante}} – CPF nº {{cpf_outorgante}}\n\n{{nome_outorgado}} – CPF nº {{cpf_outorgado}}"
 }

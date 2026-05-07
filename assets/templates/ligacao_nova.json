@@ -1,13 +1,145 @@
 {
   "id": "ligacao_nova",
+  "version": "2.0.0",
   "title": "Ofício à Embasa — Extensão de Rede",
-  "fields": [
-    { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
-    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
-    { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
-    { "id": "cep_requerente", "label": "CEP", "type": "text", "required": true },
-    { "id": "local_imovel", "label": "Localização do Imóvel (endereço da ligação)", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "requerimento",
+  "description": "Ofício solicitando ligação de água nova à Embasa (Empresa Baiana de Águas e Saneamento), com outorga de procuração.",
+  "tags": ["embasa", "água", "ligação", "extensão de rede", "saneamento", "requerimento"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "requerente",
+      "title": "Dados do Requerente",
+      "icon": "person",
+      "description": "Proprietário que solicita a ligação",
+      "fields": ["nome_requerente", "cpf_requerente", "endereco_requerente", "cep_requerente"]
+    },
+    {
+      "id": "imovel",
+      "title": "Localização do Imóvel",
+      "icon": "water_drop",
+      "description": "Endereço onde a ligação de água será instalada",
+      "fields": ["local_imovel"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_requerente",
+      "label": "Nome do Requerente",
+      "hint": "Nome completo do proprietário",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_requerente",
+      "label": "CPF do Requerente",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_requerente",
+      "label": "Endereço do Requerente",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "cep_requerente",
+      "label": "CEP",
+      "hint": "00000-000",
+      "type": "cep",
+      "width": "half",
+      "required": true,
+      "icon": "markunread_mailbox",
+      "mask": "#####-###",
+      "validation": { "pattern": "^\\d{5}-\\d{3}$", "message": "CEP inválido" }
+    },
+    {
+      "id": "local_imovel",
+      "label": "Localização do Imóvel",
+      "hint": "Endereço completo onde a ligação será feita",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "water_drop",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo do imóvel" }
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "normal"
+    },
+    "signingBlocks": [
+      { "role": "Requerente", "nameField": "nome_requerente", "cpfField": "cpf_requerente" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Lei nº 11.445/2007 (Saneamento Básico); regulamento da Embasa",
+    "jurisdiction": "Bahia — Brasil",
+    "notes": "Apresentar documento de identidade, CPF e comprovante de propriedade do imóvel no protocolo da Embasa.",
+    "estimatedTime": "3 min",
+    "color": "#0288D1"
+  },
+
   "template": "Ofício à Embasa\n\nAssunto: Extensão de rede\n\nEu, {{nome_requerente}}, portador(a) do CPF nº {{cpf_requerente}}, residente e domiciliado(a) à {{endereco_requerente}}, CEP: {{cep_requerente}},\n\nsolicitamos a ligação de água para a propriedade localizada em {{local_imovel}}.\n\nDeclaramos, outrossim, que arcaremos com o custo da retroescavadeira necessária para a realização da ligação.\n\nPara representar os Outorgantes neste procedimento, nomeamos e constituímos como nosso(a) bastante procurador(a), {{nome_requerente}}, portador(a) do CPF nº {{cpf_requerente}}, residente e domiciliado(a) à {{endereco_requerente}}, CEP: {{cep_requerente}},\n\npara, em meu nome e representação, solicitar e acompanhar o processo de ligação de água no imóvel situado no endereço acima mencionado, junto à Embasa, podendo o(a) Outorgado(a) praticar todos os atos necessários para o cumprimento deste mandato.\n\n{{data_assinatura}}\n\n______________________________________________\n{{nome_requerente}}\nCPF nº {{cpf_requerente}}"
 }

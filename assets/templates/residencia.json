@@ -1,18 +1,204 @@
 {
   "id": "residencia",
+  "version": "2.0.0",
   "title": "Declaração de Residência",
-  "fields": [
-    { "id": "nome_declarante", "label": "Nome do Declarante", "type": "text", "required": true },
-    { "id": "nacionalidade_declarante", "label": "Nacionalidade do Declarante", "type": "text", "required": true },
-    { "id": "estado_civil_declarante", "label": "Estado Civil do Declarante", "type": "text", "required": true },
-    { "id": "cpf_declarante", "label": "CPF do Declarante", "type": "cpf", "required": true },
-    { "id": "nome_residente", "label": "Nome do Residente", "type": "text", "required": true },
-    { "id": "nacionalidade_residente", "label": "Nacionalidade do Residente", "type": "text", "required": true },
-    { "id": "estado_civil_residente", "label": "Estado Civil do Residente", "type": "text", "required": true },
-    { "id": "cpf_residente", "label": "CPF do Residente", "type": "cpf", "required": true },
-    { "id": "endereco_residente", "label": "Endereço do Residente", "type": "text", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "declaracao",
+  "description": "Declaração de que terceiro reside no imóvel do declarante, para fins de comprovação de endereço, sob as penas da Lei nº 7.115/83.",
+  "tags": ["declaração", "residência", "endereço", "comprovante", "moradia", "domicílio"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "declarante",
+      "title": "Identificação do Declarante",
+      "icon": "person",
+      "description": "Proprietário ou responsável pelo imóvel que faz a declaração",
+      "fields": ["nome_declarante", "nacionalidade_declarante", "estado_civil_declarante", "cpf_declarante"]
+    },
+    {
+      "id": "residente",
+      "title": "Dados do Residente",
+      "icon": "home",
+      "description": "Pessoa cuja residência está sendo declarada",
+      "fields": ["nome_residente", "nacionalidade_residente", "estado_civil_residente", "cpf_residente", "endereco_residente"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_declarante",
+      "label": "Nome do Declarante",
+      "hint": "Nome completo do proprietário/responsável",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "nacionalidade_declarante",
+      "label": "Nacionalidade do Declarante",
+      "hint": "Ex: Brasileiro(a)",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "flag",
+      "defaultValue": "Brasileiro(a)"
+    },
+    {
+      "id": "estado_civil_declarante",
+      "label": "Estado Civil do Declarante",
+      "type": "select",
+      "width": "half",
+      "required": true,
+      "icon": "favorite",
+      "options": [
+        { "value": "Solteiro(a)", "label": "Solteiro(a)" },
+        { "value": "Casado(a)",   "label": "Casado(a)" },
+        { "value": "Divorciado(a)", "label": "Divorciado(a)" },
+        { "value": "Viúvo(a)",    "label": "Viúvo(a)" },
+        { "value": "União estável", "label": "União Estável" }
+      ]
+    },
+    {
+      "id": "cpf_declarante",
+      "label": "CPF do Declarante",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "nome_residente",
+      "label": "Nome do Residente",
+      "hint": "Nome completo de quem reside no imóvel",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person_outline",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "nacionalidade_residente",
+      "label": "Nacionalidade do Residente",
+      "hint": "Ex: Brasileiro(a)",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "flag",
+      "defaultValue": "Brasileiro(a)"
+    },
+    {
+      "id": "estado_civil_residente",
+      "label": "Estado Civil do Residente",
+      "type": "select",
+      "width": "half",
+      "required": true,
+      "icon": "favorite_border",
+      "options": [
+        { "value": "Solteiro(a)", "label": "Solteiro(a)" },
+        { "value": "Casado(a)",   "label": "Casado(a)" },
+        { "value": "Divorciado(a)", "label": "Divorciado(a)" },
+        { "value": "Viúvo(a)",    "label": "Viúvo(a)" },
+        { "value": "União estável", "label": "União Estável" }
+      ]
+    },
+    {
+      "id": "cpf_residente",
+      "label": "CPF do Residente",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_residente",
+      "label": "Endereço do Residente",
+      "hint": "Endereço onde o residente reside (imóvel do declarante)",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "home",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "normal"
+    },
+    "signingBlocks": [
+      { "role": "Declarante", "nameField": "nome_declarante", "cpfField": "cpf_declarante" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Lei nº 7.115/83 — Art. 2º (declaração escrita sob as penas da lei)",
+    "jurisdiction": "Brasil",
+    "notes": "O declarante pode responder por crime de falsidade ideológica (CP Art. 299) em caso de declaração falsa.",
+    "estimatedTime": "3 min",
+    "color": "#00ACC1"
+  },
+
   "template": "DECLARAÇÃO DE RESIDÊNCIA\n\n1. IDENTIFICAÇÃO DO DECLARANTE\n\nNome: {{nome_declarante}}\nNacionalidade: {{nacionalidade_declarante}}\nEstado Civil: {{estado_civil_declarante}}\nCPF nº {{cpf_declarante}}\n\n2. DECLARAÇÃO DE RESIDÊNCIA DE TERCEIRO\n\nDeclaro, para fins de comprovação de endereço e sob as penas da Lei nº 7.115/83 (Art. 2º), que a pessoa abaixo identificada reside e domicilia-se em meu imóvel:\n\nResidente: {{nome_residente}}\nNacionalidade: {{nacionalidade_residente}}\nEstado Civil: {{estado_civil_residente}}\nCPF nº {{cpf_residente}}\nEndereço: {{endereco_residente}}\n\n3. COMPROMISSO E RESPONSABILIDADE\n\nAssumo inteira responsabilidade pela veracidade das informações acima prestadas, estando ciente das sanções legais cabíveis em caso de declaração falsa.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n\n\n_______________________________________________________\n{{nome_declarante}}"
 }

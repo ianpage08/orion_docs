@@ -1,18 +1,205 @@
 {
   "id": "contrato_doacao",
+  "version": "2.0.0",
   "title": "Contrato de Doação Pura e Simples",
-  "fields": [
-    { "id": "nome_doador1", "label": "Nome do Doador 1", "type": "text", "required": true },
-    { "id": "cpf_doador1", "label": "CPF do Doador 1", "type": "cpf", "required": true },
-    { "id": "nome_doador2", "label": "Nome do Doador 2", "type": "text", "required": true },
-    { "id": "cpf_doador2", "label": "CPF do Doador 2", "type": "cpf", "required": true },
-    { "id": "endereco_doador", "label": "Endereço dos Doadores", "type": "text", "required": true },
-    { "id": "nome_donatario", "label": "Nome do Donatário", "type": "text", "required": true },
-    { "id": "cpf_donatario", "label": "CPF do Donatário", "type": "cpf", "required": true },
-    { "id": "endereco_donatario", "label": "Endereço do Donatário", "type": "text", "required": true },
-    { "id": "descricao_imovel", "label": "Descrição do Imóvel (localização, dimensões, confrontações)", "type": "multiline", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "contrato",
+  "description": "Instrumento particular de doação de bem imóvel a título gratuito, sem condições ou encargos.",
+  "tags": ["doação", "imóvel", "gratuito", "transferência", "doador", "donatário"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "doadores",
+      "title": "Dados dos Doadores",
+      "icon": "volunteer_activism",
+      "description": "Proprietários que realizam a doação",
+      "fields": ["nome_doador1", "cpf_doador1", "nome_doador2", "cpf_doador2", "endereco_doador"]
+    },
+    {
+      "id": "donatario",
+      "title": "Dados do Donatário",
+      "icon": "person_outline",
+      "description": "Beneficiário que recebe a doação",
+      "fields": ["nome_donatario", "cpf_donatario", "endereco_donatario"]
+    },
+    {
+      "id": "imovel",
+      "title": "Bem Doado",
+      "icon": "home",
+      "fields": ["descricao_imovel"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_doador1",
+      "label": "Nome do Doador 1",
+      "hint": "Nome completo do primeiro doador",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_doador1",
+      "label": "CPF do Doador 1",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "nome_doador2",
+      "label": "Nome do Doador 2",
+      "hint": "Nome completo do segundo doador",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_doador2",
+      "label": "CPF do Doador 2",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_doador",
+      "label": "Endereço dos Doadores",
+      "hint": "Endereço residencial comum dos doadores",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "nome_donatario",
+      "label": "Nome do Donatário",
+      "hint": "Nome completo do beneficiário",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person_outline",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_donatario",
+      "label": "CPF do Donatário",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_donatario",
+      "label": "Endereço do Donatário",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "descricao_imovel",
+      "label": "Descrição do Imóvel",
+      "hint": "Localização, dimensões, confrontações, matrícula/transcrição",
+      "type": "multiline",
+      "width": "full",
+      "required": true,
+      "icon": "description",
+      "validation": { "minLength": 20, "message": "Descreva o imóvel com detalhes" }
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "bold"
+    },
+    "signingBlocks": [
+      { "role": "Doador 1",   "nameField": "nome_doador1",   "cpfField": "cpf_doador1" },
+      { "role": "Doador 2",   "nameField": "nome_doador2",   "cpfField": "cpf_doador2" },
+      { "role": "Donatário",  "nameField": "nome_donatario", "cpfField": "cpf_donatario" },
+      { "role": "Testemunha 1" },
+      { "role": "Testemunha 2" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Código Civil Brasileiro — Arts. 538–564",
+    "jurisdiction": "Brasil",
+    "notes": "Doação de imóvel acima de 30 salários mínimos requer escritura pública (CC Art. 541).",
+    "estimatedTime": "6 min",
+    "color": "#8E24AA"
+  },
+
   "template": "CONTRATO PARTICULAR DE DOAÇÃO PURA\n\nPelo presente instrumento particular de DOAÇÃO, de um lado:\n\nDOADORES:\n{{nome_doador1}}, portador(a) do CPF {{cpf_doador1}},\ne\n{{nome_doador2}}, portador(a) do CPF {{cpf_doador2}},\nambos residentes e domiciliados na {{endereco_doador}};\n\ne, de outro lado:\n\nDONATÁRIO(A):\n{{nome_donatario}}, portador(a) do CPF {{cpf_donatario}}, residente em {{endereco_donatario}};\n\ntêm entre si, justo e contratado, o que segue:\n\n[CLAUSULA] DO IMÓVEL OBJETO DA DOAÇÃO\n\nOs DOADORES declaram que são legítimos possuidores do seguinte imóvel:\n\n{{descricao_imovel}}\n\n[CLAUSULA] DA DOAÇÃO\n\nOs DOADORES, por sua livre e espontânea vontade, a título gratuito, sem quaisquer condições ou encargos, fazem DOAÇÃO da posse descrita acima ao(à) DONATÁRIO(A), transferindo-lhe irrevogavelmente toda a posse, jus, ação e domínio que exercem sobre o referido bem.\n\n[CLAUSULA] DA ACEITAÇÃO\n\nO(A) DONATÁRIO(A) declara que aceita a presente doação, nos exatos termos descritos, livre de quaisquer ônus, pendências ou condições, conforme estipulado neste contrato.\n\n[CLAUSULA] DISPOSIÇÕES FINAIS\n\nO presente contrato é firmado em caráter irrevogável e irretratável, obrigando as partes e seus herdeiros.\n\nE, por estarem assim justos e contratados, assinam o presente instrumento em duas vias de igual teor e forma, juntamente com as testemunhas abaixo identificadas.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\nDOADORES\n______________________________________________\n{{nome_doador1}}\nCPF: {{cpf_doador1}}\n\n______________________________________________\n{{nome_doador2}}\nCPF: {{cpf_doador2}}\n\nDONATÁRIO(A)\n______________________________________________\n{{nome_donatario}}\nCPF: {{cpf_donatario}}\n\nTESTEMUNHAS\n______________________________________________\nCPF: ____________________\n\n______________________________________________\nCPF: ____________________"
 }

@@ -1,19 +1,229 @@
 {
   "id": "contrato_aluguel",
+  "version": "2.0.0",
   "title": "Contrato de Aluguel",
-  "fields": [
-    { "id": "nome_locador", "label": "Nome do Locador", "type": "text", "required": true },
-    { "id": "cpf_locador", "label": "CPF do Locador", "type": "cpf", "required": true },
-    { "id": "nome_locatario", "label": "Nome do Locatário", "type": "text", "required": true },
-    { "id": "cpf_locatario", "label": "CPF do Locatário", "type": "cpf", "required": true },
-    { "id": "endereco_imovel", "label": "Endereço do Imóvel", "type": "text", "required": true },
-    { "id": "tipo_imovel", "label": "Características do Imóvel", "type": "text", "required": true },
-    { "id": "valor_aluguel", "label": "Valor do Aluguel (ex: 600,00)", "type": "currency", "required": true },
-    { "id": "dia_pagamento", "label": "Dia de Pagamento", "type": "text", "required": true },
-    { "id": "data_inicio", "label": "Data de Início", "type": "date", "required": true },
-    { "id": "data_fim", "label": "Data de Término", "type": "date", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "contrato",
+  "description": "Contrato de locação residencial com prazo determinado entre locador e locatário.",
+  "tags": ["aluguel", "locação", "imóvel", "residencial", "inquilino"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "locador",
+      "title": "Dados do Locador",
+      "icon": "person",
+      "description": "Proprietário do imóvel",
+      "fields": ["nome_locador", "cpf_locador"]
+    },
+    {
+      "id": "locatario",
+      "title": "Dados do Locatário",
+      "icon": "person_outline",
+      "description": "Inquilino que irá ocupar o imóvel",
+      "fields": ["nome_locatario", "cpf_locatario"]
+    },
+    {
+      "id": "imovel",
+      "title": "Dados do Imóvel",
+      "icon": "home",
+      "fields": ["endereco_imovel", "tipo_imovel"]
+    },
+    {
+      "id": "financeiro",
+      "title": "Condições Financeiras",
+      "icon": "payments",
+      "fields": ["valor_aluguel", "dia_pagamento"]
+    },
+    {
+      "id": "vigencia",
+      "title": "Vigência do Contrato",
+      "icon": "calendar_today",
+      "fields": ["data_inicio", "data_fim"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_locador",
+      "label": "Nome do Locador",
+      "hint": "Nome completo do proprietário",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo do locador" }
+    },
+    {
+      "id": "cpf_locador",
+      "label": "CPF do Locador",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "nome_locatario",
+      "label": "Nome do Locatário",
+      "hint": "Nome completo do inquilino",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person_outline",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo do locatário" }
+    },
+    {
+      "id": "cpf_locatario",
+      "label": "CPF do Locatário",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_imovel",
+      "label": "Endereço do Imóvel",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "tipo_imovel",
+      "label": "Características do Imóvel",
+      "hint": "Ex: Apartamento de 2 quartos, 60m², sala, cozinha, banheiro",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "home"
+    },
+    {
+      "id": "valor_aluguel",
+      "label": "Valor do Aluguel",
+      "hint": "Ex: 1.200,00",
+      "type": "currency",
+      "width": "half",
+      "required": true,
+      "icon": "attach_money",
+      "prefix": "R$",
+      "validation": { "min": 0.01, "message": "Informe um valor válido" }
+    },
+    {
+      "id": "dia_pagamento",
+      "label": "Dia de Vencimento",
+      "hint": "Entre 1 e 31",
+      "type": "number",
+      "width": "half",
+      "required": true,
+      "icon": "event",
+      "validation": { "min": 1, "max": 31, "message": "Dia inválido (1–31)" }
+    },
+    {
+      "id": "data_inicio",
+      "label": "Data de Início",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "calendar_today"
+    },
+    {
+      "id": "data_fim",
+      "label": "Data de Término",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "event_available",
+      "validation": { "afterField": "data_inicio", "message": "Deve ser posterior à data de início" }
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "bold"
+    },
+    "signingBlocks": [
+      { "role": "Locador",    "nameField": "nome_locador",   "cpfField": "cpf_locador" },
+      { "role": "Locatário",  "nameField": "nome_locatario", "cpfField": "cpf_locatario" },
+      { "role": "Testemunha 1" },
+      { "role": "Testemunha 2" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": [
+      {
+        "rule": "dateAfter",
+        "field": "data_fim",
+        "reference": "data_inicio",
+        "message": "Data de término deve ser posterior à data de início"
+      }
+    ]
+  },
+
+  "meta": {
+    "legalBasis": "Lei nº 8.245/91 (Lei do Inquilinato)",
+    "jurisdiction": "Brasil",
+    "notes": "Recomenda-se reconhecimento de firma em cartório para maior segurança jurídica.",
+    "estimatedTime": "5 min",
+    "color": "#1E88E5"
+  },
+
   "template": "CONTRATO DE ALUGUEL\n\nNESTE ATO, denominado(s) LOCADOR: {{nome_locador}}, brasileiro(a), maior, capaz, inscrito(a) no CPF: {{cpf_locador}}.\n\nDe OUTRO LADO, denominado(s) LOCATÁRIO: {{nome_locatario}}, brasileiro(a), maior, capaz, inscrito(a) no CPF: {{cpf_locatario}}.\n\n[CLAUSULA] DO OBJETO DA LOCAÇÃO\n\nO IMÓVEL de propriedade do LOCADOR situa-se na {{endereco_imovel}}. Características do Imóvel: {{tipo_imovel}}.\n\n[CLAUSULA] DA DESTINAÇÃO DO IMÓVEL\n\nA presente locação destina-se ao uso do imóvel para fins residenciais, estando o LOCATÁRIO proibido de sublocá-lo ou usá-lo de forma diferente do previsto, sem a devida autorização do LOCADOR.\n\n[CLAUSULA] DO VALOR DO ALUGUEL\n\nO LOCATÁRIO pagará o valor de R$ {{valor_aluguel}}, a ser efetuado diretamente ao LOCADOR.\n\n[SUBCLAUSULA] Pagamento deverá ser realizado até o dia {{dia_pagamento}} de cada mês.\n\n[CLAUSULA] DAS OBRIGAÇÕES DO LOCATÁRIO\n\nO LOCATÁRIO responsabiliza-se pelo pagamento de todos os serviços públicos e despesas ligadas à conservação do imóvel, tais como saneamento básico e energia elétrica.\n\n[SUBCLAUSULA] Construções, modificações ou benfeitorias no imóvel deverão ser previamente autorizadas pelo LOCADOR.\n\n[CLAUSULA] DO PRAZO DE LOCAÇÃO\n\nO prazo de locação iniciando-se em {{data_inicio}} e encerrando-se em {{data_fim}}.\n\n[CLAUSULA] DAS CONDIÇÕES DE ENTREGA\n\nO LOCATÁRIO concorda que o imóvel será entregue limpo e em condições de perfeito funcionamento, incluindo instalações elétricas e hidráulicas, portas, portões, paredes pintadas e cômodos em bom estado.\n\n[SUBCLAUSULA] O LOCATÁRIO assume responsabilidade em manter o imóvel locado nestas condições e o restituirá ao término do contrato nas mesmas condições, salvo deterioração decorrente do uso normal.\n\n[CLAUSULA] DO FORO\n\nLOCATÁRIO E LOCADOR elegem o foro da comarca de {{local_assinatura}}, onde está situado o imóvel, para dirimir quaisquer controvérsias decorrentes deste contrato.\n\nDe comum acordo, LOCATÁRIO E LOCADOR assinam o presente INSTRUMENTO PARTICULAR DE LOCAÇÃO juntamente com 2 (duas) testemunhas, ficando o mesmo aceito pelas cláusulas acima descritas.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n_____________________________________________________\n{{nome_locador}}\nCPF: {{cpf_locador}}\n\n_____________________________________________________\n{{nome_locatario}}\nCPF: {{cpf_locatario}}\n\n_____________________________________________________\nTestemunha 1\n\n_____________________________________________________\nTestemunha 2"
 }

@@ -1,17 +1,198 @@
 {
   "id": "recibo_simples",
+  "version": "2.0.0",
   "title": "Recibo de Compra e Venda",
-  "fields": [
-    { "id": "valor_transacao", "label": "Valor da Transação (ex: 20.000,00)", "type": "currency", "required": true },
-    { "id": "nome_comprador", "label": "Nome do Comprador", "type": "text", "required": true },
-    { "id": "cpf_comprador", "label": "CPF do Comprador", "type": "cpf", "required": true },
-    { "id": "endereco_comprador", "label": "Endereço do Comprador", "type": "text", "required": true },
-    { "id": "nome_vendedor", "label": "Nome do Vendedor", "type": "text", "required": true },
-    { "id": "cpf_vendedor", "label": "CPF do Vendedor", "type": "cpf", "required": true },
-    { "id": "endereco_vendedor", "label": "Endereço do Vendedor", "type": "text", "required": true },
-    { "id": "descricao_imovel", "label": "Descrição do Imóvel (nome, área, localização, confrontações)", "type": "multiline", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "recibo",
+  "description": "Recibo que comprova o recebimento de valor referente à compra e venda de bem imóvel.",
+  "tags": ["recibo", "compra", "venda", "imóvel", "quitação"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "transacao",
+      "title": "Valor da Transação",
+      "icon": "attach_money",
+      "fields": ["valor_transacao"]
+    },
+    {
+      "id": "comprador",
+      "title": "Dados do Comprador",
+      "icon": "shopping_cart",
+      "fields": ["nome_comprador", "cpf_comprador", "endereco_comprador"]
+    },
+    {
+      "id": "vendedor",
+      "title": "Dados do Vendedor",
+      "icon": "sell",
+      "fields": ["nome_vendedor", "cpf_vendedor", "endereco_vendedor"]
+    },
+    {
+      "id": "imovel",
+      "title": "Imóvel Negociado",
+      "icon": "home",
+      "fields": ["descricao_imovel"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "valor_transacao",
+      "label": "Valor da Transação",
+      "hint": "Ex: 20.000,00",
+      "type": "currency",
+      "width": "half",
+      "required": true,
+      "icon": "attach_money",
+      "prefix": "R$",
+      "validation": { "min": 0.01, "message": "Informe um valor válido" }
+    },
+    {
+      "id": "nome_comprador",
+      "label": "Nome do Comprador",
+      "hint": "Nome completo do adquirente",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_comprador",
+      "label": "CPF do Comprador",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_comprador",
+      "label": "Endereço do Comprador",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "nome_vendedor",
+      "label": "Nome do Vendedor",
+      "hint": "Nome completo de quem vende",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person_outline",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_vendedor",
+      "label": "CPF do Vendedor",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_vendedor",
+      "label": "Endereço do Vendedor",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "descricao_imovel",
+      "label": "Descrição do Imóvel",
+      "hint": "Nome, área, localização, confrontações, matrícula",
+      "type": "multiline",
+      "width": "full",
+      "required": true,
+      "icon": "description",
+      "validation": { "minLength": 20, "message": "Descreva o imóvel com detalhes" }
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "bold"
+    },
+    "signingBlocks": [
+      { "role": "Vendedor",  "nameField": "nome_vendedor",  "cpfField": "cpf_vendedor" },
+      { "role": "Comprador", "nameField": "nome_comprador", "cpfField": "cpf_comprador" },
+      { "role": "Testemunha 1" },
+      { "role": "Testemunha 2" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": []
+  },
+
+  "meta": {
+    "legalBasis": "Código Civil Brasileiro — Art. 481",
+    "jurisdiction": "Brasil",
+    "notes": "Este recibo serve como comprovante de quitação e deve ser guardado pelas partes.",
+    "estimatedTime": "5 min",
+    "color": "#F57C00"
+  },
+
   "template": "RECIBO DE COMPRA E VENDA\n\nValor R$ {{valor_transacao}}\n\nRecebemos do Sr./Sra. {{nome_comprador}}, portador(a) do CPF: {{cpf_comprador}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_comprador}}, a importância de R$ {{valor_transacao}}, referente à venda que lhe fizemos do seguinte imóvel:\n\n{{descricao_imovel}}\n\nVenda esta feita pelo(a) Sr./Sra. {{nome_vendedor}}, portador(a) do CPF: {{cpf_vendedor}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_vendedor}}.\n\nO presente Recibo de Compra e Venda é feito em caráter irrevogável e irretratável e vai por mim assinado, com duas testemunhas na forma da lei.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n___________________________________________________\n{{nome_vendedor}}\nCPF: {{cpf_vendedor}}\n\n____________________________________________________\n{{nome_comprador}}\nCPF: {{cpf_comprador}}\n\nTESTEMUNHAS:\n________________________________________\n\n________________________________________"
 }

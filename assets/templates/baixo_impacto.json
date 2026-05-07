@@ -1,18 +1,196 @@
 {
   "id": "baixo_impacto",
+  "version": "2.0.0",
   "title": "Autorização de Evento — Prefeitura",
-  "fields": [
-    { "id": "nome_requerente", "label": "Nome do Requerente", "type": "text", "required": true },
-    { "id": "endereco_requerente", "label": "Endereço do Requerente", "type": "text", "required": true },
-    { "id": "cpf_requerente", "label": "CPF do Requerente", "type": "cpf", "required": true },
-    { "id": "nome_evento", "label": "Nome do Evento", "type": "text", "required": true },
-    { "id": "data_inicio_evento", "label": "Data de Início do Evento", "type": "date", "required": true },
-    { "id": "data_fim_evento", "label": "Data de Término do Evento", "type": "date", "required": true },
-    { "id": "local_evento", "label": "Local do Evento (endereço completo)", "type": "text", "required": true },
-    { "id": "horario_inicio", "label": "Horário de Início", "type": "text", "required": true },
-    { "id": "horario_fim", "label": "Horário de Término", "type": "text", "required": true },
-    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
-    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  "category": "requerimento",
+  "description": "Requerimento de alvará municipal para realização de evento de baixo impacto junto à Prefeitura.",
+  "tags": ["evento", "prefeitura", "alvará", "requerimento", "baixo impacto", "festa"],
+  "theme": "light",
+
+  "layout": {
+    "density": "comfortable",
+    "defaultColumns": 2,
+    "showSectionHeaders": true,
+    "showFieldNumbers": true,
+    "showProgressBar": true
+  },
+
+  "sections": [
+    {
+      "id": "requerente",
+      "title": "Dados do Requerente",
+      "icon": "person",
+      "description": "Responsável pelo evento",
+      "fields": ["nome_requerente", "cpf_requerente", "endereco_requerente"]
+    },
+    {
+      "id": "evento",
+      "title": "Dados do Evento",
+      "icon": "event",
+      "fields": ["nome_evento", "local_evento", "data_inicio_evento", "data_fim_evento", "horario_inicio", "horario_fim"]
+    },
+    {
+      "id": "assinatura",
+      "title": "Assinatura",
+      "icon": "draw",
+      "fields": ["local_assinatura", "data_assinatura"]
+    }
   ],
+
+  "fields": [
+    {
+      "id": "nome_requerente",
+      "label": "Nome do Requerente",
+      "hint": "Nome completo do responsável pelo evento",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "person",
+      "validation": { "minLength": 5, "maxLength": 150, "message": "Informe o nome completo" }
+    },
+    {
+      "id": "cpf_requerente",
+      "label": "CPF do Requerente",
+      "hint": "000.000.000-00",
+      "type": "cpf",
+      "width": "half",
+      "required": true,
+      "icon": "badge",
+      "mask": "###.###.###-##",
+      "validation": { "pattern": "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", "message": "CPF inválido" }
+    },
+    {
+      "id": "endereco_requerente",
+      "label": "Endereço do Requerente",
+      "hint": "Rua, número, bairro, cidade — UF",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "location_on",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo" }
+    },
+    {
+      "id": "nome_evento",
+      "label": "Nome do Evento",
+      "hint": "Título ou nome oficial do evento",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "celebration",
+      "validation": { "minLength": 3, "maxLength": 100, "message": "Informe o nome do evento" }
+    },
+    {
+      "id": "local_evento",
+      "label": "Local do Evento",
+      "hint": "Endereço completo onde ocorrerá o evento",
+      "type": "text",
+      "width": "full",
+      "required": true,
+      "icon": "place",
+      "validation": { "minLength": 10, "message": "Informe o endereço completo do evento" }
+    },
+    {
+      "id": "data_inicio_evento",
+      "label": "Data de Início do Evento",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "calendar_today"
+    },
+    {
+      "id": "data_fim_evento",
+      "label": "Data de Término do Evento",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "event_available",
+      "validation": { "afterField": "data_inicio_evento", "message": "Deve ser posterior à data de início" }
+    },
+    {
+      "id": "horario_inicio",
+      "label": "Horário de Início",
+      "hint": "Ex: 08:00",
+      "type": "time",
+      "width": "half",
+      "required": true,
+      "icon": "schedule",
+      "mask": "##:##"
+    },
+    {
+      "id": "horario_fim",
+      "label": "Horário de Término",
+      "hint": "Ex: 22:00",
+      "type": "time",
+      "width": "half",
+      "required": true,
+      "icon": "timer_off",
+      "mask": "##:##"
+    },
+    {
+      "id": "local_assinatura",
+      "label": "Local de Assinatura",
+      "hint": "Cidade onde será assinado",
+      "type": "text",
+      "width": "half",
+      "required": true,
+      "icon": "place"
+    },
+    {
+      "id": "data_assinatura",
+      "label": "Data de Assinatura",
+      "type": "date",
+      "width": "half",
+      "required": true,
+      "icon": "today"
+    }
+  ],
+
+  "pdf": {
+    "pageSize": "A4",
+    "orientation": "portrait",
+    "margins": { "top": 48, "right": 48, "bottom": 48, "left": 48 },
+    "header": {
+      "showDocId": true,
+      "showBadge": true,
+      "badgeText": "RASCUNHO",
+      "showLogo": false
+    },
+    "footer": {
+      "appName": "Orion Docs",
+      "showPageNumber": true,
+      "showTimestamp": false
+    },
+    "typography": {
+      "titleSize": 13,
+      "bodySize": 11,
+      "lineHeight": 1.75,
+      "clauseStyle": "normal"
+    },
+    "signingBlocks": [
+      { "role": "Requerente", "nameField": "nome_requerente", "cpfField": "cpf_requerente" }
+    ],
+    "watermark": null
+  },
+
+  "validation": {
+    "requireAllFields": true,
+    "crossFieldRules": [
+      {
+        "rule": "dateAfter",
+        "field": "data_fim_evento",
+        "reference": "data_inicio_evento",
+        "message": "Data de término deve ser posterior ou igual à data de início"
+      }
+    ]
+  },
+
+  "meta": {
+    "legalBasis": "Lei Orgânica Municipal; Código de Posturas vigente",
+    "jurisdiction": "Brasil — Municipal",
+    "notes": "Protocolar na Secretaria de Ordem Pública ou equivalente com pelo menos 5 dias úteis de antecedência.",
+    "estimatedTime": "4 min",
+    "color": "#3949AB"
+  },
+
   "template": "PREFEITURA MUNICIPAL\n\nIlmo. Sr. Prefeito Municipal,\n\nEu, {{nome_requerente}}, brasileiro(a), maior, residente e domiciliado(a) na {{endereco_requerente}}, portador(a) do CPF {{cpf_requerente}}, venho, por meio deste, solicitar de Vossa Senhoria, alvará para a realização do \"{{nome_evento}}\", que será realizado no período de {{data_inicio_evento}} a {{data_fim_evento}}, em {{local_evento}}, com início previsto para as {{horario_inicio}} e término às {{horario_fim}}.\n\nCerto de ser atendido, desde já agradeço a Vossa compreensão.\n\n{{local_assinatura}}, {{data_assinatura}}\n\nAtenciosamente,\n\n{{nome_requerente}}\nCPF: {{cpf_requerente}}\n_______________________________________________"
 }
