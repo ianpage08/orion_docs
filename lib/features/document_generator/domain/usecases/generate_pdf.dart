@@ -60,11 +60,29 @@ class GeneratePdf {
       fontSize: _fontSize,
       color: PdfColors.grey,
     );
+    final footerStyle = pw.TextStyle(
+      font: normalFont,
+      fontSize: 8.0,
+      color: PdfColors.grey600,
+    );
 
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: pw.EdgeInsets.all(_margin),
+        footer: (_) => pw.Padding(
+          padding: const pw.EdgeInsets.only(top: 20),
+          child: pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('Orion Docs', style: footerStyle),
+              pw.Text(
+                'https://orion-docs-seven.vercel.app/',
+                style: footerStyle,
+              ),
+            ],
+          ),
+        ),
         build: (_) => [
           // Título — centralizado, negrito
           pw.Center(
