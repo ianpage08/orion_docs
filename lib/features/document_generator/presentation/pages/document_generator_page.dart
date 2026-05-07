@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../providers/document_providers.dart';
 import '../widgets/dynamic_form_builder.dart';
 import '../widgets/preview_panel.dart';
 import '../widgets/split_screen_container.dart';
 import '../widgets/template_not_available_widget.dart';
 import '../../../sidebar/presentation/controllers/sidebar_controller.dart';
+import '../../../home/presentation/pages/home_screen.dart';
 
 class DocumentGeneratorPage extends ConsumerWidget {
   const DocumentGeneratorPage({super.key});
@@ -25,9 +25,9 @@ class DocumentGeneratorPage extends ConsumerWidget {
       });
     }
 
-    // No sidebar item selected
+    // No sidebar item selected — show Command Center
     if (activeId == null) {
-      return const _EmptyState();
+      return const HomeScreen();
     }
 
     // Sidebar item selected but no template available
@@ -39,33 +39,6 @@ class DocumentGeneratorPage extends ConsumerWidget {
     return const SplitScreenContainer(
       formPanel: DynamicFormBuilder(),
       previewPanel: PreviewPanel(),
-    );
-  }
-}
-
-class _EmptyState extends StatelessWidget {
-  const _EmptyState();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Icons.auto_stories_rounded,
-            size: 52,
-            color: AppColors.textMuted,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Selecione um documento',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.textMuted,
-                ),
-          ),
-        ],
-      ),
     );
   }
 }
