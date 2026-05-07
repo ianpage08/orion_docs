@@ -20,7 +20,7 @@ ios/
 linux/
 macos/
 windows/
-assets/
+/assets/
 pubspec.yaml
 pubspec.lock
 analysis_options.yaml

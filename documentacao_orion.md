@@ -1,3 +1,7 @@
+
+ 1. Por que package:flutter/material.dart faz ponte entre 17 comunidades diferentes? (betweenness 0.138 — a maior do grafo)
+  2. O que conecta OrionDocsApp, _AppShell, _AnimatedBackground ao restante do sistema? (254 nós fracamente conectados — possíveis gaps de documentação)
+  3. Presentation Pages deveria ser dividida? (coesão 0.05 — a mais baixa do grafo)
 # Orion Docs — Documentação
 
 ## O que é o Orion Docs?
