@@ -1,0 +1,18 @@
+{
+  "id": "residencia",
+  "title": "Declaração de Residência",
+  "fields": [
+    { "id": "nome_declarante", "label": "Nome do Declarante", "type": "text", "required": true },
+    { "id": "nacionalidade_declarante", "label": "Nacionalidade do Declarante", "type": "text", "required": true },
+    { "id": "estado_civil_declarante", "label": "Estado Civil do Declarante", "type": "text", "required": true },
+    { "id": "cpf_declarante", "label": "CPF do Declarante", "type": "cpf", "required": true },
+    { "id": "nome_residente", "label": "Nome do Residente", "type": "text", "required": true },
+    { "id": "nacionalidade_residente", "label": "Nacionalidade do Residente", "type": "text", "required": true },
+    { "id": "estado_civil_residente", "label": "Estado Civil do Residente", "type": "text", "required": true },
+    { "id": "cpf_residente", "label": "CPF do Residente", "type": "cpf", "required": true },
+    { "id": "endereco_residente", "label": "Endereço do Residente", "type": "text", "required": true },
+    { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
+    { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
+  ],
+  "template": "DECLARAÇÃO DE RESIDÊNCIA\n\n1. IDENTIFICAÇÃO DO DECLARANTE\n\nNome: {{nome_declarante}}\nNacionalidade: {{nacionalidade_declarante}}\nEstado Civil: {{estado_civil_declarante}}\nCPF nº {{cpf_declarante}}\n\n2. DECLARAÇÃO DE RESIDÊNCIA DE TERCEIRO\n\nDeclaro, para fins de comprovação de endereço e sob as penas da Lei nº 7.115/83 (Art. 2º), que a pessoa abaixo identificada reside e domicilia-se em meu imóvel:\n\nResidente: {{nome_residente}}\nNacionalidade: {{nacionalidade_residente}}\nEstado Civil: {{estado_civil_residente}}\nCPF nº {{cpf_residente}}\nEndereço: {{endereco_residente}}\n\n3. COMPROMISSO E RESPONSABILIDADE\n\nAssumo inteira responsabilidade pela veracidade das informações acima prestadas, estando ciente das sanções legais cabíveis em caso de declaração falsa.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n\n\n_______________________________________________________\n{{nome_declarante}}"
+}

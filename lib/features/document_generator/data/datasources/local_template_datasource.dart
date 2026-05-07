@@ -28,5 +28,6 @@ class LocalTemplateDatasource {
         DocumentType.ligacaoNova => 'assets/templates/ligacao_nova.json',
         DocumentType.alteracaoTitularidade =>
           'assets/templates/alteracao_titularidade.json',
+        DocumentType.residencia => 'assets/templates/residencia.json',
       };
 }

@@ -19,6 +19,7 @@ String _docId(DocumentType type) => switch (type) {
       DocumentType.baixoImpacto => 'AUT-BI-001',
       DocumentType.ligacaoNova => 'REQ-LN-001',
       DocumentType.alteracaoTitularidade => 'PRO-AT-001',
+      DocumentType.residencia => 'DCL-RS-001',
     };
 
 class DynamicFormBuilder extends ConsumerWidget {
@@ -170,9 +171,14 @@ class DynamicFormBuilder extends ConsumerWidget {
           children: [
             _buildCardHeader(filled, total, progress),
             Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
-                children: _buildFieldPairs(document.fields),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final singleCol = constraints.maxWidth < 500;
+                  return ListView(
+                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+                    children: _buildFieldPairs(document.fields, singleCol: singleCol),
+                  );
+                },
               ),
             ),
           ],
@@ -223,8 +229,17 @@ class DynamicFormBuilder extends ConsumerWidget {
     );
   }
 
-  List<Widget> _buildFieldPairs(List<Field> fields) {
+  List<Widget> _buildFieldPairs(List<Field> fields, {bool singleCol = false}) {
     final rows = <Widget>[];
+
+    if (singleCol) {
+      for (int i = 0; i < fields.length; i++) {
+        rows.add(FormFieldWidget(key: ValueKey(fields[i].id), field: fields[i], index: i + 1));
+        if (i < fields.length - 1) rows.add(const SizedBox(height: 12));
+      }
+      return rows;
+    }
+
     for (int i = 0; i < fields.length; i += 2) {
       final field1 = fields[i];
       final field2 = i + 1 < fields.length ? fields[i + 1] : null;

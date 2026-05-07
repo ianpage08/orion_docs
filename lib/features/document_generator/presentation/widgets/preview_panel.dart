@@ -14,6 +14,7 @@ String _docIdForPreview(DocumentType type) => switch (type) {
       DocumentType.baixoImpacto => 'AUT-BI-001',
       DocumentType.ligacaoNova => 'REQ-LN-001',
       DocumentType.alteracaoTitularidade => 'PRO-AT-001',
+      DocumentType.residencia => 'DCL-RS-001',
     };
 
 class PreviewPanel extends ConsumerStatefulWidget {

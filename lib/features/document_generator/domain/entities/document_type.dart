@@ -8,4 +8,5 @@ enum DocumentType {
   baixoImpacto,
   ligacaoNova,
   alteracaoTitularidade,
+  residencia,
 }

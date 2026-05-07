@@ -30,6 +30,32 @@ class _AppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.sizeOf(context).width < 700;
+
+    if (isMobile) {
+      return Scaffold(
+        drawer: const Drawer(child: AppSidebar()),
+        body: _AnimatedBackground(
+          child: Stack(
+            children: [
+              const DocumentGeneratorPage(),
+              Positioned(
+                top: 6,
+                left: 6,
+                child: Builder(
+                  builder: (ctx) => IconButton(
+                    icon: const Icon(Icons.menu, color: Color(0xFF8888A0), size: 20),
+                    tooltip: 'Menu',
+                    onPressed: () => Scaffold.of(ctx).openDrawer(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return const Scaffold(
       body: _AnimatedBackground(
         child: Row(

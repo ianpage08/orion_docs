@@ -58,5 +58,6 @@ DocumentType? _idToDocumentType(String? id) => switch (id) {
       'baixo_impacto' => DocumentType.baixoImpacto,
       'ligacao_nova' => DocumentType.ligacaoNova,
       'alteracao_titularidade' => DocumentType.alteracaoTitularidade,
+      'residencia' => DocumentType.residencia,
       _ => null,
     };
