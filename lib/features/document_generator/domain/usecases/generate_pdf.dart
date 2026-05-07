@@ -9,7 +9,34 @@ class GeneratePdf {
 
   static const double _margin = 72.0; // 2.54 cm (Word "Normal")
   static const double _fontSize = 12.0;
+  static const double _titleFontSize = 14.0;
   static const String _firstLineIndent = '    '; // ≈ 0.5 cm em Helvetica 12pt
+
+  static const List<String> _ordinals = [
+    'primeira',
+    'segunda',
+    'terceira',
+    'quarta',
+    'quinta',
+    'sexta',
+    'sétima',
+    'oitava',
+    'nona',
+    'décima',
+    'décima primeira',
+    'décima segunda',
+    'décima terceira',
+    'décima quarta',
+    'décima quinta',
+    'décima sexta',
+    'décima sétima',
+    'décima oitava',
+    'décima nona',
+    'vigésima',
+  ];
+
+  String _ordinalFor(int n) =>
+      (n >= 1 && n <= _ordinals.length) ? _ordinals[n - 1] : '${n}ª';
 
   Future<Uint8List> call(Document document) async {
     final pdf = pw.Document();
@@ -21,6 +48,11 @@ class GeneratePdf {
     final boldStyle = pw.TextStyle(
       font: boldFont,
       fontSize: _fontSize,
+      fontWeight: pw.FontWeight.bold,
+    );
+    final titleStyle = pw.TextStyle(
+      font: boldFont,
+      fontSize: _titleFontSize,
       fontWeight: pw.FontWeight.bold,
     );
     final placeholderStyle = pw.TextStyle(
@@ -38,7 +70,7 @@ class GeneratePdf {
           pw.Center(
             child: pw.Text(
               document.title,
-              style: boldStyle,
+              style: titleStyle,
               textAlign: pw.TextAlign.center,
             ),
           ),
@@ -70,29 +102,56 @@ class GeneratePdf {
       bool extraSpaceBefore = false;
 
       if (_isSignatureBlock(trimmed)) {
+        extraSpaceBefore = true;
         widget = _buildSignatureBlock(
-            trimmed, document.fields, normalStyle, boldStyle, placeholderStyle);
+          trimmed,
+          document.fields,
+          normalStyle,
+          boldStyle,
+          placeholderStyle,
+        );
       } else if (trimmed.startsWith('[CLAUSULA]')) {
         clauseCount++;
         subClauseCount = 0;
         extraSpaceBefore = true;
         widget = _buildClauseHeader(
-            trimmed, clauseCount, document.fields, boldStyle, placeholderStyle);
+          trimmed,
+          clauseCount,
+          document.fields,
+          boldStyle,
+          placeholderStyle,
+        );
       } else if (trimmed.startsWith('[SUBCLAUSULA]')) {
         subClauseCount++;
-        widget = _buildSubClause(trimmed, clauseCount, subClauseCount,
-            document.fields, normalStyle, boldStyle, placeholderStyle);
+        widget = _buildSubClause(
+          trimmed,
+          clauseCount,
+          subClauseCount,
+          document.fields,
+          normalStyle,
+          boldStyle,
+          placeholderStyle,
+        );
       } else if (_isSubtitle(trimmed)) {
         // Subtítulo — alinhado à esquerda total
         widget = _buildSubtitle(
-            trimmed, document.fields, boldStyle, placeholderStyle);
+          trimmed,
+          document.fields,
+          boldStyle,
+          placeholderStyle,
+        );
       } else {
         widget = _buildParagraph(
-            trimmed, document.fields, normalStyle, boldStyle, placeholderStyle);
+          trimmed,
+          document.fields,
+          normalStyle,
+          boldStyle,
+          placeholderStyle,
+        );
       }
 
       if (extraSpaceBefore && widgets.isNotEmpty) {
-        widgets.add(pw.SizedBox(height: 10));
+        widgets.add(pw.SizedBox(height: _isSignatureBlock(trimmed) ? 20 : 10));
       }
       widgets.add(widget);
       widgets.add(pw.SizedBox(height: 6));
@@ -103,9 +162,12 @@ class GeneratePdf {
 
   // Bloco com linha de assinatura (underscores consecutivos)
   bool _isSignatureBlock(String block) {
-    return block.split('\n').any(
-      (line) => RegExp(r'^_+$').hasMatch(line.trim()) && line.trim().length >= 5,
-    );
+    return block
+        .split('\n')
+        .any(
+          (line) =>
+              RegExp(r'^_+$').hasMatch(line.trim()) && line.trim().length >= 5,
+        );
   }
 
   // Subtítulo: linha única, caixa alta, sem campos, menos de 60 chars
@@ -128,16 +190,21 @@ class GeneratePdf {
     pw.TextStyle placeholderStyle,
   ) {
     final title = block.substring('[CLAUSULA]'.length).trim();
-    final prefix = 'Cláusula $number';
+    final prefix = 'Cláusula ${_ordinalFor(number)}:';
 
     if (title.isEmpty) {
       return pw.Text(prefix, style: boldStyle, textAlign: pw.TextAlign.left);
     }
 
-    final titleSpans =
-        _buildSpans(title, fields, boldStyle, boldStyle, placeholderStyle);
+    final titleSpans = _buildSpans(
+      title,
+      fields,
+      boldStyle,
+      boldStyle,
+      placeholderStyle,
+    );
     final allSpans = <pw.InlineSpan>[
-      pw.TextSpan(text: '$prefix – ', style: boldStyle),
+      pw.TextSpan(text: '$prefix ', style: boldStyle),
       ...titleSpans,
     ];
 
@@ -158,17 +225,24 @@ class GeneratePdf {
     pw.TextStyle placeholderStyle,
   ) {
     final text = block.substring('[SUBCLAUSULA]'.length).trim();
-    final contentSpans =
-        _buildSpans(text, fields, normalStyle, boldStyle, placeholderStyle);
+    final contentSpans = _buildSpans(
+      text,
+      fields,
+      normalStyle,
+      boldStyle,
+      placeholderStyle,
+    );
 
     return pw.Padding(
       padding: const pw.EdgeInsets.only(left: 14.0),
       child: pw.RichText(
         textAlign: pw.TextAlign.justify,
-        text: pw.TextSpan(children: [
-          pw.TextSpan(text: '$clause.$sub ', style: boldStyle),
-          ...contentSpans,
-        ]),
+        text: pw.TextSpan(
+          children: [
+            pw.TextSpan(text: '$clause.$sub ', style: boldStyle),
+            ...contentSpans,
+          ],
+        ),
       ),
     );
   }
@@ -180,8 +254,13 @@ class GeneratePdf {
     pw.TextStyle boldStyle,
     pw.TextStyle placeholderStyle,
   ) {
-    final spans =
-        _buildSpans(block, fields, boldStyle, boldStyle, placeholderStyle);
+    final spans = _buildSpans(
+      block,
+      fields,
+      boldStyle,
+      boldStyle,
+      placeholderStyle,
+    );
     return pw.RichText(
       textAlign: pw.TextAlign.left,
       text: pw.TextSpan(children: spans),
@@ -214,47 +293,62 @@ class GeneratePdf {
       final isUnderline = RegExp(r'^_+$').hasMatch(trimmed);
 
       if (isUnderline) {
-        children.add(pw.Center(child: pw.Text(trimmed, style: normalStyle)));
+        children.add(pw.Text(trimmed, style: normalStyle));
         prevWasUnderline = true;
         isFirstAfterUnderline = true;
       } else if (prevWasUnderline && isFirstAfterUnderline) {
-        // Nome — negrito, centralizado
+        // Nome — negrito, esquerda
         isFirstAfterUnderline = false;
-        final spans =
-            _buildSpans(trimmed, fields, boldStyle, boldStyle, placeholderStyle);
-        children.add(pw.Center(
-          child: pw.RichText(
-            textAlign: pw.TextAlign.center,
-            text: pw.TextSpan(children: spans),
-          ),
-        ));
-      } else if (prevWasUnderline) {
-        // CPF, cargo ou testemunha — normal, centralizado
         final spans = _buildSpans(
-            trimmed, fields, normalStyle, boldStyle, placeholderStyle);
-        children.add(pw.Center(
-          child: pw.RichText(
-            textAlign: pw.TextAlign.center,
+          trimmed,
+          fields,
+          boldStyle,
+          boldStyle,
+          placeholderStyle,
+        );
+        children.add(
+          pw.RichText(
+            textAlign: pw.TextAlign.left,
             text: pw.TextSpan(children: spans),
           ),
-        ));
+        );
+      } else if (prevWasUnderline) {
+        // CPF, cargo ou testemunha — normal, esquerda
+        final spans = _buildSpans(
+          trimmed,
+          fields,
+          normalStyle,
+          boldStyle,
+          placeholderStyle,
+        );
+        children.add(
+          pw.RichText(
+            textAlign: pw.TextAlign.left,
+            text: pw.TextSpan(children: spans),
+          ),
+        );
       } else {
-        // Rótulo de seção (ex.: "DOADORES", "TESTEMUNHAS:") — negrito, centralizado
-        final spans =
-            _buildSpans(trimmed, fields, boldStyle, boldStyle, placeholderStyle);
-        children.add(pw.Center(
-          child: pw.RichText(
-            textAlign: pw.TextAlign.center,
+        // Rótulo de seção (ex.: "DOADORES", "TESTEMUNHAS:") — negrito, esquerda
+        final spans = _buildSpans(
+          trimmed,
+          fields,
+          boldStyle,
+          boldStyle,
+          placeholderStyle,
+        );
+        children.add(
+          pw.RichText(
+            textAlign: pw.TextAlign.left,
             text: pw.TextSpan(children: spans),
           ),
-        ));
+        );
         prevWasUnderline = false;
         isFirstAfterUnderline = false;
       }
     }
 
     return pw.Column(
-      crossAxisAlignment: pw.CrossAxisAlignment.center,
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: children,
     );
   }
@@ -276,7 +370,12 @@ class GeneratePdf {
       }
       final prefix = i == 0 ? _firstLineIndent : '';
       final spans = _buildSpans(
-          prefix + lines[i], fields, normalStyle, boldStyle, placeholderStyle);
+        prefix + lines[i],
+        fields,
+        normalStyle,
+        boldStyle,
+        placeholderStyle,
+      );
       allSpans.addAll(spans);
     }
 
@@ -300,10 +399,12 @@ class GeneratePdf {
 
     for (final match in regex.allMatches(templateText)) {
       if (match.start > lastEnd) {
-        spans.add(pw.TextSpan(
-          text: templateText.substring(lastEnd, match.start),
-          style: normalStyle,
-        ));
+        spans.add(
+          pw.TextSpan(
+            text: templateText.substring(lastEnd, match.start),
+            style: normalStyle,
+          ),
+        );
       }
 
       final fieldId = match.group(1)!;
@@ -318,8 +419,9 @@ class GeneratePdf {
       );
 
       if (field.value.isEmpty) {
-        spans.add(pw.TextSpan(
-            text: '[${field.label}]', style: placeholderStyle));
+        spans.add(
+          pw.TextSpan(text: '[${field.label}]', style: placeholderStyle),
+        );
       } else {
         spans.add(pw.TextSpan(text: field.value, style: boldStyle));
       }
@@ -328,10 +430,9 @@ class GeneratePdf {
     }
 
     if (lastEnd < templateText.length) {
-      spans.add(pw.TextSpan(
-        text: templateText.substring(lastEnd),
-        style: normalStyle,
-      ));
+      spans.add(
+        pw.TextSpan(text: templateText.substring(lastEnd), style: normalStyle),
+      );
     }
 
     return spans;

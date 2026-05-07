@@ -5,15 +5,13 @@
     { "id": "valor_transacao", "label": "Valor da Transação (ex: 20.000,00)", "type": "currency", "required": true },
     { "id": "nome_comprador", "label": "Nome do Comprador", "type": "text", "required": true },
     { "id": "cpf_comprador", "label": "CPF do Comprador", "type": "cpf", "required": true },
-    { "id": "rg_comprador", "label": "RG do Comprador", "type": "text", "required": true },
     { "id": "endereco_comprador", "label": "Endereço do Comprador", "type": "text", "required": true },
     { "id": "nome_vendedor", "label": "Nome do Vendedor", "type": "text", "required": true },
     { "id": "cpf_vendedor", "label": "CPF do Vendedor", "type": "cpf", "required": true },
-    { "id": "rg_vendedor", "label": "RG do Vendedor", "type": "text", "required": true },
     { "id": "endereco_vendedor", "label": "Endereço do Vendedor", "type": "text", "required": true },
     { "id": "descricao_imovel", "label": "Descrição do Imóvel (nome, área, localização, confrontações)", "type": "multiline", "required": true },
     { "id": "local_assinatura", "label": "Local de Assinatura", "type": "text", "required": true },
     { "id": "data_assinatura", "label": "Data de Assinatura", "type": "date", "required": true }
   ],
-  "template": "RECIBO DE COMPRA E VENDA\n\nValor R$ {{valor_transacao}}\n\nRecebemos do Sr./Sra. {{nome_comprador}}, portador(a) do CPF: {{cpf_comprador}} e RG {{rg_comprador}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_comprador}}, a importância de R$ {{valor_transacao}}, referente à venda que lhe fizemos do seguinte imóvel:\n\n{{descricao_imovel}}\n\nVenda esta feita pelo(a) Sr./Sra. {{nome_vendedor}}, portador(a) do CPF: {{cpf_vendedor}} e RG {{rg_vendedor}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_vendedor}}.\n\nO presente Recibo de Compra e Venda é feito em caráter irrevogável e irretratável e vai por mim assinado, com duas testemunhas na forma da lei.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n___________________________________________________\n{{nome_vendedor}}\nCPF: {{cpf_vendedor}}\n\n____________________________________________________\n{{nome_comprador}}\nCPF: {{cpf_comprador}}\n\nTESTEMUNHAS:\n________________________________________\n\n________________________________________"
+  "template": "RECIBO DE COMPRA E VENDA\n\nValor R$ {{valor_transacao}}\n\nRecebemos do Sr./Sra. {{nome_comprador}}, portador(a) do CPF: {{cpf_comprador}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_comprador}}, a importância de R$ {{valor_transacao}}, referente à venda que lhe fizemos do seguinte imóvel:\n\n{{descricao_imovel}}\n\nVenda esta feita pelo(a) Sr./Sra. {{nome_vendedor}}, portador(a) do CPF: {{cpf_vendedor}}, brasileiro(a), maior, capaz, residente e domiciliado(a) na {{endereco_vendedor}}.\n\nO presente Recibo de Compra e Venda é feito em caráter irrevogável e irretratável e vai por mim assinado, com duas testemunhas na forma da lei.\n\n{{local_assinatura}}, {{data_assinatura}}.\n\n___________________________________________________\n{{nome_vendedor}}\nCPF: {{cpf_vendedor}}\n\n____________________________________________________\n{{nome_comprador}}\nCPF: {{cpf_comprador}}\n\nTESTEMUNHAS:\n________________________________________\n\n________________________________________"
 }
