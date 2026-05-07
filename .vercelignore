@@ -1,0 +1,26 @@
+# Flutter build artifacts — keep only build/web
+build/windows
+build/flutter_assets
+build/native_assets
+build/*.dill*
+build/*.cache*
+build/39227ae77ee9f5804eef85740c312767
+
+# Flutter/Dart tooling
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+
+# Source code not needed for static deploy
+lib/
+test/
+android/
+ios/
+linux/
+macos/
+windows/
+assets/
+pubspec.yaml
+pubspec.lock
+analysis_options.yaml
