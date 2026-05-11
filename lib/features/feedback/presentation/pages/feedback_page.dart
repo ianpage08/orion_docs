@@ -174,23 +174,25 @@ class _Header extends StatelessWidget {
           child: const Icon(Icons.bug_report_outlined, color: AppColors.textActive, size: 22),
         ),
         const SizedBox(width: AppSpacing.md),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Reportar Bug / Sugestões',
-              style: AppTypography.headline.copyWith(
-                color: isDark ? AppColors.textPrimary : AppColors.lightTextPrimary,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Reportar Bug / Sugestões',
+                style: AppTypography.headline.copyWith(
+                  color: isDark ? AppColors.textPrimary : AppColors.lightTextPrimary,
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              'Sua opinião nos ajuda a melhorar o Orion Docs',
-              style: AppTypography.body.copyWith(
-                color: isDark ? AppColors.textMuted : AppColors.lightTextMuted,
+              const SizedBox(height: 2),
+              Text(
+                'Sua opinião nos ajuda a melhorar o Orion Docs',
+                style: AppTypography.body.copyWith(
+                  color: isDark ? AppColors.textMuted : AppColors.lightTextMuted,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
