@@ -35,5 +35,8 @@ class SidebarRepositoryImpl implements SidebarRepository {
         NavGroup(id: 'procuracoes', label: 'Procurações', items: [
           NavItem(id: 'alteracao_titularidade', label: 'Alteração de titularidade'),
         ]),
+        NavGroup(id: 'suporte', label: 'Suporte', items: [
+          NavItem(id: 'feedback', label: 'Reportar Bug / Sugestões'),
+        ]),
       ];
 }

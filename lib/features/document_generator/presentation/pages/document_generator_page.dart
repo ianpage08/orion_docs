@@ -7,6 +7,7 @@ import '../widgets/split_screen_container.dart';
 import '../widgets/template_not_available_widget.dart';
 import '../../../sidebar/presentation/controllers/sidebar_controller.dart';
 import '../../../home/presentation/pages/home_screen.dart';
+import '../../../feedback/presentation/pages/feedback_page.dart';
 
 class DocumentGeneratorPage extends ConsumerWidget {
   const DocumentGeneratorPage({super.key});
@@ -28,6 +29,10 @@ class DocumentGeneratorPage extends ConsumerWidget {
     // No sidebar item selected — show Command Center
     if (activeId == null) {
       return const HomeScreen();
+    }
+
+    if (activeId == 'feedback') {
+      return const FeedbackPage();
     }
 
     // Sidebar item selected but no template available
