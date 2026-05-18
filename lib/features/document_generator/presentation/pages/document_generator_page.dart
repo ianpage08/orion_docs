@@ -17,33 +17,80 @@ class DocumentGeneratorPage extends ConsumerWidget {
     final activeId = ref.watch(sidebarControllerProvider).activeItemId;
     final documentType = ref.watch(selectedDocumentTypeProvider);
 
-    // Bridge: when a template loads successfully, push into formStateProvider
-    if (documentType != null) {
-      ref.listen(documentTemplateProvider(documentType), (_, next) {
-        next.whenData(
-          (doc) => ref.read(formStateProvider.notifier).loadDocument(doc),
-        );
-      });
-    }
+    if (activeId == null) return const HomeScreen();
+    if (activeId == 'feedback') return const FeedbackPage();
+    if (documentType == null) return const TemplateNotAvailableWidget();
 
-    // No sidebar item selected — show Command Center
-    if (activeId == null) {
-      return const HomeScreen();
-    }
+    return ref.watch(formStateProvider(documentType)).when(
+      loading: () => const _TemplateLoadingWidget(),
+      error: (_, __) => _TemplateLoadErrorWidget(
+        onRetry: () => ref.invalidate(documentTemplateProvider(documentType)),
+      ),
+      data: (_) => const SplitScreenContainer(
+        formPanel: DynamicFormBuilder(),
+        previewPanel: PreviewPanel(),
+      ),
+    );
+  }
+}
 
-    if (activeId == 'feedback') {
-      return const FeedbackPage();
-    }
+class _TemplateLoadingWidget extends StatelessWidget {
+  const _TemplateLoadingWidget();
 
-    // Sidebar item selected but no template available
-    if (documentType == null) {
-      return const TemplateNotAvailableWidget();
-    }
+  @override
+  Widget build(BuildContext context) {
+    return const ColoredBox(
+      color: Color(0xFF1E1E2E),
+      child: Center(
+        child: CircularProgressIndicator(
+          color: Color(0xFF6666AA),
+          strokeWidth: 2,
+        ),
+      ),
+    );
+  }
+}
 
-    // Template available — show split screen
-    return const SplitScreenContainer(
-      formPanel: DynamicFormBuilder(),
-      previewPanel: PreviewPanel(),
+class _TemplateLoadErrorWidget extends StatelessWidget {
+  final VoidCallback onRetry;
+  const _TemplateLoadErrorWidget({required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: const Color(0xFF1E1E2E),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.error_outline_rounded,
+              size: 48,
+              color: Color(0xFF884444),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Erro ao carregar o modelo',
+              style: TextStyle(
+                color: Color(0xFF888899),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Não foi possível carregar este documento.\nTente novamente ou reinicie o aplicativo.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0xFF555566), fontSize: 13),
+            ),
+            const SizedBox(height: 24),
+            FilledButton.tonal(
+              onPressed: onRetry,
+              child: const Text('Tentar novamente'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

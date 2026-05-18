@@ -50,7 +50,9 @@ class _FormFieldWidgetState extends ConsumerState<FormFieldWidget> {
   }
 
   void _onChanged(String value) {
-    ref.read(formStateProvider.notifier).updateField(widget.field.id, value);
+    final documentType = ref.read(selectedDocumentTypeProvider);
+    if (documentType == null) return;
+    ref.read(formStateProvider(documentType).notifier).updateField(widget.field.id, value);
   }
 
   Icon? _prefixIcon() => switch (widget.field.type) {

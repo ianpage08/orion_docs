@@ -16,7 +16,10 @@ class _GenerateButtonState extends ConsumerState<GenerateButton> {
   bool _isGenerating = false;
 
   Future<void> _generate() async {
-    final document = ref.read(formStateProvider);
+    final documentType = ref.read(selectedDocumentTypeProvider);
+    final document = documentType != null
+        ? ref.read(formStateProvider(documentType)).valueOrNull
+        : null;
     if (document == null) return;
 
     setState(() => _isGenerating = true);

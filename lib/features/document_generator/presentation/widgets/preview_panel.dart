@@ -30,7 +30,8 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
 
   @override
   Widget build(BuildContext context) {
-    final document = ref.watch(formStateProvider);
+    final documentType = ref.watch(selectedDocumentTypeProvider)!;
+    final document = ref.watch(formStateProvider(documentType)).valueOrNull;
 
     return ColoredBox(
       color: const Color(0xFF0D0D1A),

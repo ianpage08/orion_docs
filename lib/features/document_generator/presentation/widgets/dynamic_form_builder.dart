@@ -27,7 +27,8 @@ class DynamicFormBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final document = ref.watch(formStateProvider);
+    final documentType = ref.watch(selectedDocumentTypeProvider)!;
+    final document = ref.watch(formStateProvider(documentType)).valueOrNull;
 
     if (document == null) {
       return const ColoredBox(

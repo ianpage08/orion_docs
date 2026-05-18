@@ -8,7 +8,11 @@ class ClearButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return OutlinedButton.icon(
-      onPressed: () => ref.read(formStateProvider.notifier).reset(),
+      onPressed: () {
+        final documentType = ref.read(selectedDocumentTypeProvider);
+        if (documentType == null) return;
+        ref.read(formStateProvider(documentType).notifier).reset();
+      },
       icon: const Icon(Icons.refresh_rounded, size: 16),
       label: const Text('Limpar campos'),
       style: OutlinedButton.styleFrom(
